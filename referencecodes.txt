@@ -1,0 +1,1012 @@
+====Home Page code Start====
+
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitPlan - Personal Fitness Planner</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#23482f] bg-background-dark/95 backdrop-blur-md px-4 py-3 md:px-10">
+<div class="flex items-center gap-4 text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-[32px]">fitness_center</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">FitPlan</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden items-center gap-9 md:flex">
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#features">Features</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#testimonials">Testimonials</a>
+<a class="text-white hover:text-primary transition-colors text-sm font-medium leading-normal" href="#pricing">Pricing</a>
+</div>
+<div class="flex gap-2">
+<button class="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#23482f] hover:bg-[#2f5e3d] transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Login</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-[#0fd650] transition-colors text-[#112217] text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Get Started</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<div class="@container">
+<div class="flex flex-col gap-6 px-4 py-10 @[480px]:gap-8 @[864px]:flex-row-reverse items-center">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl shadow-2xl shadow-primary/10 @[480px]:h-auto @[480px]:min-w-[400px] @[864px]:w-1/2 overflow-hidden relative" data-alt="Athletic person lifting weights in a gym with dramatic lighting">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent"></div>
+<div class="w-full h-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB9TG8ora1djQ8oKli07MuW97CnQSjP2Y44unVo474F0HSlA9Sv2T5uwqFZcEan6HmTwsOYeRWcQoGvsn1dbgKH3jUNhv0jntC3VVPQ3LBdMB33_qTohK3XttHl5Fc9WNGulKsI1KXyDwO4qb0XC7lFGqkmYQaauBBVTrpGN8nPYJucnJ215WV37lUWq_miXvQMMjr-XMzBj1-iJWNYoY8zNpHagxrs622zTy_NlPdq4DY21LibEKOqJrwBBoDT5Tp3_FpAWo1Uzj0");'></div>
+</div>
+<div class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center @[864px]:w-1/2">
+<div class="flex flex-col gap-4 text-left">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl lg:text-6xl">
+                                    Build the Body You Want. <span class="text-primary">Track the Progress</span> You Need.
+                                </h1>
+<h2 class="text-[#92c9a4] text-lg font-normal leading-relaxed">
+                                    The ultimate weekly planner for serious fitness enthusiasts. Log workouts, set PRs, and visualize your gains without the clutter.
+                                </h2>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-[#0fd650] transition-all text-[#112217] text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Start Your Journey</span>
+</button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-transparent border border-[#326744] hover:bg-[#193322] transition-all text-white text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">View Demo</span>
+</button>
+</div>
+<div class="flex items-center gap-2 text-[#92c9a4] text-sm">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span>No credit card required</span>
+<span class="mx-2">•</span>
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span>14-day free trial</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Features Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5 bg-[#14281c] border-y border-[#23482f]" id="features">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<div class="flex flex-col gap-10 px-4 py-16 @container">
+<div class="flex flex-col gap-4 items-center text-center">
+<div class="inline-flex items-center justify-center rounded-full bg-[#193322] border border-[#326744] px-3 py-1 mb-2">
+<p class="text-primary text-xs font-bold uppercase tracking-wider">Features</p>
+</div>
+<h2 class="text-white tracking-tight text-[32px] font-bold leading-tight @[480px]:text-4xl max-w-[720px]">
+                            Everything You Need to Succeed
+                        </h2>
+<p class="text-[#92c9a4] text-lg font-normal leading-normal max-w-[600px]">Designed for focus and efficiency. We stripped away the noise so you can focus on the lift.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-0">
+<!-- Feature 1 -->
+<div class="group flex flex-1 gap-5 rounded-xl border border-[#326744] bg-[#193322] p-6 flex-col hover:border-primary/50 transition-all duration-300">
+<div class="text-primary bg-[#23482f] w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">flag</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-white text-xl font-bold leading-tight">Set Weekly Goals</h3>
+<p class="text-[#92c9a4] text-base font-normal leading-relaxed">Define your targets and crush them with weekly planning tools that adapt to your schedule.</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="group flex flex-1 gap-5 rounded-xl border border-[#326744] bg-[#193322] p-6 flex-col hover:border-primary/50 transition-all duration-300">
+<div class="text-primary bg-[#23482f] w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-white text-xl font-bold leading-tight">Log Every Rep</h3>
+<p class="text-[#92c9a4] text-base font-normal leading-relaxed">Intuitive logging for weights, cardio, and intervals without the clutter. Just tap and lift.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="group flex flex-1 gap-5 rounded-xl border border-[#326744] bg-[#193322] p-6 flex-col hover:border-primary/50 transition-all duration-300">
+<div class="text-primary bg-[#23482f] w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-white text-xl font-bold leading-tight">Visualize Progress</h3>
+<p class="text-[#92c9a4] text-base font-normal leading-relaxed">Charts and analytics that show your transformation over time. See your strength skyrocket.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Showcase / Card Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<div class="p-4 py-12 @container">
+<div class="flex flex-col-reverse items-center justify-start rounded-2xl @xl:flex-row @xl:items-center shadow-[0_0_4px_rgba(0,0,0,0.1)] bg-gradient-to-br from-[#193322] to-[#102216] border border-[#326744] overflow-hidden">
+<div class="flex w-full min-w-72 grow flex-col items-start justify-center gap-6 py-8 px-6 @xl:px-10 @xl:py-12 @xl:w-1/2">
+<h3 class="text-white text-3xl font-bold leading-tight tracking-[-0.015em]">Intuitive Workout Logging</h3>
+<p class="text-[#92c9a4] text-lg font-normal leading-relaxed">
+                                A clean, distraction-free interface that lets you focus on your lift, not your phone. Quickly add sets, modify weights, and rest with built-in timers.
+                            </p>
+<ul class="flex flex-col gap-3">
+<li class="flex items-center gap-3 text-white">
+<span class="material-symbols-outlined text-primary">check</span>
+<span>One-tap set completion</span>
+</li>
+<li class="flex items-center gap-3 text-white">
+<span class="material-symbols-outlined text-primary">check</span>
+<span>Auto-calculated warmups</span>
+</li>
+<li class="flex items-center gap-3 text-white">
+<span class="material-symbols-outlined text-primary">check</span>
+<span>Previous lift history overlay</span>
+</li>
+</ul>
+<button class="mt-4 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#23482f] hover:bg-[#2f5e3d] text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors">
+<span class="truncate">See How It Works</span>
+</button>
+</div>
+<div class="w-full @xl:w-1/2 h-full bg-[#102216] relative flex items-center justify-center p-8">
+<!-- Abstract representation of UI -->
+<div class="relative z-10 w-[240px] rounded-[2rem] border-4 border-[#326744] bg-[#112217] overflow-hidden shadow-2xl rotate-3 transform hover:rotate-0 transition-all duration-500">
+<div class="bg-cover bg-center h-[480px] w-full" data-alt="Mobile app interface showing dark mode fitness tracker" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGTtWkWpr1S1naLCpn5i0pTbArg9mlOJnExyg1dL3A7ciIhHDEY1AO6JeaOyD8_5yu_pl69PC35Z1DtA1p5Ye9GRxAX5Xe_W-PflY3eS5yUJOvprlan1_O1acuH4-OTcaEZneMK8Hx4cwznyPzEa2SMtwjcmncmBdDtPUXfEg4ykTnvFNxElzJIYzeNd3w_6lG8pXhXMtqGyv_XTOCKVJ9gektWUOkQVFlE8-03XwC_8njPuVzd4Jpuwoaem3lteMByC02rguEUwM");'>
+<div class="absolute inset-0 bg-black/40 flex flex-col p-4">
+<!-- Mock UI Elements -->
+<div class="w-full h-8 flex justify-between items-center mb-6">
+<div class="w-6 h-6 rounded-full bg-white/20"></div>
+<div class="w-20 h-4 rounded-full bg-white/20"></div>
+</div>
+<div class="w-3/4 h-8 rounded-lg bg-white/10 mb-2"></div>
+<div class="w-1/2 h-4 rounded-lg bg-white/10 mb-8"></div>
+<div class="space-y-3">
+<div class="flex justify-between items-center p-3 rounded-lg bg-[#193322] border-l-4 border-primary">
+<div class="w-1/3 h-4 rounded bg-white/20"></div>
+<div class="w-8 h-8 rounded-full border border-primary/50"></div>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg bg-[#193322] border-l-4 border-primary">
+<div class="w-1/3 h-4 rounded bg-white/20"></div>
+<div class="w-8 h-8 rounded-full border border-primary/50"></div>
+</div>
+<div class="flex justify-between items-center p-3 rounded-lg bg-[#193322]/50 border-l-4 border-white/10">
+<div class="w-1/3 h-4 rounded bg-white/20"></div>
+<div class="w-8 h-8 rounded-full border border-white/10"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative blob -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/20 blur-[80px] rounded-full z-0"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Carousel / Testimonials -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-10 bg-[#14281c] border-y border-[#23482f]" id="testimonials">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-8">
+<div class="text-center">
+<h2 class="text-white text-2xl font-bold mb-2">Community Champions</h2>
+<p class="text-[#92c9a4]">Join thousands of athletes tracking their success.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-6 items-stretch justify-center">
+<div class="flex flex-1 flex-col gap-4 p-6 rounded-xl bg-[#193322] border border-[#326744]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full border-2 border-primary" data-alt="Portrait of Alex R." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUWVigNjhQuyabc8b9KUCb_J5YAMth3BKKLQtOR8BPSL_Uvp0r2TmyU1FTKY6uOKVmtM5ZxgaIhd7nXymKY2c-a5Kcx4OHg0-shDyiTJiDLzCs9O9QqhpvfvYEJKkRvbKoaOwGea5To4-Y8abJaklODo94JCnDGdHO_5wsI75VCjaAVPyFRhKU63FxX2Wy3NpcBUNMSJRRI_8nGO62-tgyoxSK9fuhH0nw3jQwpOExP4gEOUrVU4X_wGuOcbgEpMsJBbBA3XjSjgU");'></div>
+<div>
+<p class="text-white text-base font-bold leading-normal">Alex R.</p>
+<div class="flex text-primary text-[12px]">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+</div>
+</div>
+<p class="text-[#92c9a4] text-sm font-normal leading-relaxed italic">"Finally, a tracker that doesn't get in my way at the gym. It's fast, simple, and the dark mode saves my battery."</p>
+</div>
+<div class="flex flex-1 flex-col gap-4 p-6 rounded-xl bg-[#193322] border border-[#326744]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full border-2 border-primary" data-alt="Portrait of Sarah J." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-WFH3snaLYo0kyzCkLtIx1Yf5DovmC7AxdKYKRExJWhQZrZQF4YJorUXp3VVYp2x-Qhger2c-CngkMhCnMpd1mG5PLYN0_oW9BMAn59MrB71Xac1yKlVMzN4jODe4hJTIvgfiGKIEjyoAgjvabzsx1GduwuIfFkHTNH15MtTbjtzZjU_7TrbljNclL1DWqYH2mrC4Ots2FcXVWj2_bjqXk0a14W_RLiCpxh3zTpDhYNgYsao27mwCBacTwPFzgNgMPfDnnTmL3Po");'></div>
+<div>
+<p class="text-white text-base font-bold leading-normal">Sarah J.</p>
+<div class="flex text-primary text-[12px]">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+</div>
+</div>
+<p class="text-[#92c9a4] text-sm font-normal leading-relaxed italic">"The progress visualization keeps me motivated every week. Seeing the graph go up is addictive!"</p>
+</div>
+<div class="flex flex-1 flex-col gap-4 p-6 rounded-xl bg-[#193322] border border-[#326744]">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full border-2 border-primary" data-alt="Portrait of Mike T." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQUt_9aH8Y3Xw5YPEFlyLcsiKpSEoxJzkZHiVmA9MfXsNhXATz24j5jXaufqe2HwedCdq1eCLctSaKMPZH0inqG3lcNovYayR4B8jFIqiOnOmAMcnoyVU4cW8aV55CXkeFvBZwk7DOe4l4MhugyOq53UUhAHRLMns2Lbdv0V7OP90iWM7pq_3BYAfnZsknmHKQP-LaUKrHmhoa-K3GUkDfctxVM6ZlIumXmufYk5QcxgJG-5HgHGcJkbPX7WhXa5Zjvnx_HeQGMJE");'></div>
+<div>
+<p class="text-white text-base font-bold leading-normal">Mike T.</p>
+<div class="flex text-primary text-[12px]">
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+</div>
+</div>
+<p class="text-[#92c9a4] text-sm font-normal leading-relaxed italic">"Simple, effective, and looks great. I've hit 3 PRs since switching to FitPlan from my notes app."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="px-4 md:px-40 flex flex-1 justify-center py-20">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 items-center text-center gap-6">
+<h2 class="text-white text-4xl font-black tracking-tight max-w-2xl">Ready to Level Up Your Training?</h2>
+<p class="text-[#92c9a4] text-lg max-w-xl">Join for free today and start building the best version of yourself.</p>
+<div class="flex gap-4 mt-2">
+<button class="flex min-w-[160px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-[#0fd650] transition-colors text-[#112217] text-base font-bold leading-normal tracking-[0.015em] shadow-[0_0_20px_rgba(19,236,91,0.3)]">
+<span class="truncate">Get Started Free</span>
+</button>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-[#193322] hover:bg-[#23482f] transition-colors text-white text-base font-bold leading-normal tracking-[0.015em] border border-[#326744]">
+<span class="truncate">Login</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="border-t border-[#23482f] bg-[#102216] py-10 px-4 md:px-40">
+<div class="layout-content-container flex flex-col md:flex-row justify-between max-w-[960px] mx-auto gap-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2 text-white">
+<span class="material-symbols-outlined text-primary">fitness_center</span>
+<span class="font-bold text-lg">FitPlan</span>
+</div>
+<p class="text-[#5b7a66] text-sm max-w-[240px]">The modern workout tracker for athletes who want results.</p>
+</div>
+<div class="flex gap-16 flex-wrap">
+<div class="flex flex-col gap-3">
+<h4 class="text-white font-bold text-sm">Product</h4>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Features</a>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Pricing</a>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Download</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-white font-bold text-sm">Company</h4>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">About</a>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Blog</a>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Careers</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-white font-bold text-sm">Legal</h4>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Privacy</a>
+<a class="text-[#92c9a4] hover:text-primary text-sm" href="#">Terms</a>
+</div>
+</div>
+</div>
+<div class="max-w-[960px] mx-auto mt-10 pt-6 border-t border-[#193322] text-center text-[#5b7a66] text-xs">
+                 © 2023 FitPlan Inc. All rights reserved.
+             </div>
+</footer>
+</div>
+</div>
+</body></html>
+
+====Home Page code End====
+
+===Sign up page code start===
+
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fitness Planner - Sign Up</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@300..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#112217",
+                        "input-bg": "#193322",
+                        "input-border": "#326744",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "Noto Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for better aesthetic in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #112217;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #326744;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #13ec5b;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden antialiased">
+<div class="min-h-screen flex flex-col lg:flex-row">
+<!-- Left Side: Visual/Hero -->
+<div class="relative hidden lg:flex w-full lg:w-1/2 bg-[#112217] flex-col justify-between p-12 overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Dark gym interior with weights and equipment" class="w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="Dark aesthetic gym background with weights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCROQaAj2AGUandwrj_PRr_jt9fh6KBc0R5xVUHuobZ-R7CDGClJM_huji_ie0GNWDBWmf5xLzEBTOXN9ki2fC_woqVI-oVmbCEXKm7QaMFdKIuKdNko71r9xEKPDSotW9BnJRQVt5wEtr0BJYiBNmEHFL_PAV-0fe0A62Xmk4nednAl3bee5I3I-GIFGJXX1J9f-IUoJWZbHUkJUmRkaE0oriVIGkvyyfZ6tgAtpvQTJE4HhxZKA2MhETc2DWtBYiUYxu6d7nFD1k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#102216] via-[#102216]/60 to-transparent"></div>
+</div>
+<!-- Logo Area -->
+<div class="relative z-10 flex items-center gap-3">
+<div class="size-10 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-2xl font-bold tracking-tight">Fitness Planner</h2>
+</div>
+<!-- Hero Text -->
+<div class="relative z-10 mt-auto max-w-lg">
+<h1 class="text-4xl lg:text-5xl font-black leading-tight tracking-[-0.02em] mb-6">
+                    Unlock Your <br/>
+<span class="text-primary">True Potential</span>
+</h1>
+<p class="text-gray-300 text-lg leading-relaxed mb-8">
+                    Join thousands of athletes tracking their workouts, setting ambitious goals, and visualizing their progress every single day.
+                </p>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-4">
+<img alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-[#102216]" data-alt="User avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuAG7YK9u8x6M6kLSqu1ZT37UkYwyT6hiGSnrnEYTShMppCF2hPik6GIDJoREU7mvfNLbTNBQ_Pnm7KAbbtb4w5QVXB4wpl6gHqw4FYRKVbXm6SxGJcIv56AqbXutYPLcPEyzlzVQaii82MxOOrwBAaAoAJO5ZyRV8HNgfDQEy08TW6fuN4rZQH1YAHKNDhw23nt2r1ABWPyZHCdVjrybGGCJZnlbxEdrJ-rVwIgguGnH8EAa5Qa_l9a6O7X2ipH5Vw9ZgMyxsZ0c"/>
+<img alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-[#102216]" data-alt="User avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2cJFigqx-ZeDTlPbjhUD07DgXSs5wOrsyubXJVzaihc2h7Vi4M8udkp1Q9SwqN0psGk-Fw9AZ7fze63tBqdNQ1Pq1bVlZNkClMYxWWyQVzoiUnh5A-10B73d6Wh0XtyoDeyB-q1bRRpq__9M-r9PYVdFwef49-N9LX-d9NGsyGLTfTESpOV1t_lsq50BZNZH42U5Mv4vs3sFQCBmLiej-joIfcR8yZXVAAxCNE-S8SROr7ZUuzLeqkNJV_zrXGf5Mlaoc4T13sqg"/>
+<img alt="User Avatar" class="w-10 h-10 rounded-full border-2 border-[#102216]" data-alt="User avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUEdsXdEm_ct4XJX5OfEHKhowzKIEE3bthYE6aReTgFR8uKi6G4RRjPJLpdlFW1G5Rsfrp8fCI9lUJCBBS35kTKmFaDxdtDoYzjfA9-HmmOan2NADf0BlFew0Qcqu_C6auFhMWHHDAAW6nj7bbicmYiSFQhmG-dq_9-J7mHiqWcCkCusYYuCPl3hxK6ZG1Mg0q-c4rYDJ3NI5dbtStLhRlmAH-7NoBpZM6mbGIV7DHlaK2m39yqAhnpLVrx5o1D2QIjDlUrLQhL0c"/>
+<div class="w-10 h-10 rounded-full border-2 border-[#102216] bg-primary flex items-center justify-center text-[#102216] font-bold text-xs">2k+</div>
+</div>
+<span class="text-sm font-medium text-gray-400">Athletes joined this week</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Sign Up Form -->
+<div class="w-full lg:w-1/2 flex flex-col justify-center px-6 py-12 lg:px-24 bg-surface-dark relative">
+<!-- Mobile Logo (only visible on small screens) -->
+<div class="lg:hidden flex items-center gap-3 mb-8 justify-center">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold">Fitness Planner</h2>
+</div>
+<div class="max-w-md mx-auto w-full">
+<!-- Header -->
+<div class="mb-8">
+<h2 class="text-3xl font-bold text-white mb-2">Create Account</h2>
+<p class="text-[#92c9a4] text-sm">Join us to start tracking your fitness progress today.</p>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-4 mb-6">
+<button class="flex items-center justify-center gap-2 h-12 rounded-lg border border-[#326744] bg-[#193322] hover:bg-[#23482f] transition-colors text-white text-sm font-medium">
+<img alt="Google" class="w-5 h-5" data-alt="Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlo9TTQ5UwAao45-1i9ru6EPRg8Z9YHLZeanb7jlPNYB1Ktdj_0aG3Jmdr97SyNjtQTNL1lQanZ41y9dAsUVp-CQ0VxOIEvbL06lP5Toc2_Mj7a6eIDJ6AxlHWfX2WJVkY6u9IfRJtgLtwzN3ibC3z11dzSv7fy0gCQF53wT6iEW7MumH_qXCy_zA7x9AywcKFPvFx06MSzSLT4mlnSU3F-UqQZufukE7SzZYXEeQqvCS79oZNtQlL6NwNm7Rbgf35sl9di7Mlz1I"/>
+                        Google
+                    </button>
+<button class="flex items-center justify-center gap-2 h-12 rounded-lg border border-[#326744] bg-[#193322] hover:bg-[#23482f] transition-colors text-white text-sm font-medium">
+<img alt="Apple" class="w-5 h-5 invert" data-alt="Apple logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhbU6jMn4TfFabYbX19mVzKjrEAtFKlj7rzo9UEhvwKspM4lixZf7ewmEl-Q-OQiUXdmO5q7Y_IYwgeqcKLd9pQz9bej2kZckRqmhfbPfXJrw9uQphRlMpHGYpS5LccNe8SQEDHM1yc0Pl7UOmXyic1GanGMwJZ3bMeYzishdO_eBKxocyDUYXV1w7VXlLfUeDDlEvsuLtM7f461bE7SxIB3XJ1QOZeh6YfxbLmellAlnqskS9s22QZ4HRLp9yqCj5JKLVObSsscc"/>
+                        Apple
+                    </button>
+</div>
+<!-- Divider -->
+<div class="relative flex py-2 items-center mb-6">
+<div class="flex-grow border-t border-[#326744]"></div>
+<span class="flex-shrink-0 mx-4 text-xs text-[#92c9a4] font-medium uppercase tracking-wider">Or continue with email</span>
+<div class="flex-grow border-t border-[#326744]"></div>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-5">
+<!-- Name Fields -->
+<div class="flex gap-4">
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">First Name</span>
+<input class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-[#326744] bg-[#193322] focus:border-primary h-12 px-4 placeholder:text-[#92c9a4]/50 text-sm" placeholder="John" type="text"/>
+</label>
+<label class="flex flex-col flex-1">
+<span class="text-white text-sm font-medium leading-normal pb-2">Last Name</span>
+<input class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-[#326744] bg-[#193322] focus:border-primary h-12 px-4 placeholder:text-[#92c9a4]/50 text-sm" placeholder="Doe" type="text"/>
+</label>
+</div>
+<!-- Email Field -->
+<label class="flex flex-col w-full">
+<span class="text-white text-sm font-medium leading-normal pb-2">Email Address</span>
+<div class="relative">
+<input class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-[#326744] bg-[#193322] focus:border-primary h-12 pl-4 pr-10 placeholder:text-[#92c9a4]/50 text-sm" placeholder="john@example.com" type="email"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#92c9a4] text-[20px] pointer-events-none">mail</span>
+</div>
+</label>
+<!-- Password Field -->
+<label class="flex flex-col w-full">
+<span class="text-white text-sm font-medium leading-normal pb-2">Password</span>
+<div class="relative">
+<input class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-[#326744] bg-[#193322] focus:border-primary h-12 pl-4 pr-10 placeholder:text-[#92c9a4]/50 text-sm" placeholder="At least 8 characters" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-[#92c9a4] hover:text-white transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<!-- Password Strength Indicator -->
+<div class="flex gap-1 mt-2 h-1 w-full">
+<div class="h-full w-1/4 bg-red-500 rounded-full"></div>
+<div class="h-full w-1/4 bg-[#326744] rounded-full"></div>
+<div class="h-full w-1/4 bg-[#326744] rounded-full"></div>
+<div class="h-full w-1/4 bg-[#326744] rounded-full"></div>
+</div>
+<p class="text-xs text-[#92c9a4] mt-1">Strength: Weak</p>
+</label>
+<!-- Terms Checkbox -->
+<div class="flex items-start gap-3 mt-1">
+<div class="flex items-center h-5">
+<input class="w-5 h-5 border border-[#326744] rounded bg-[#193322] focus:ring-primary focus:ring-offset-[#112217] text-primary transition duration-150 ease-in-out cursor-pointer" id="terms" type="checkbox"/>
+</div>
+<label class="text-sm text-[#92c9a4]" for="terms">
+                            I agree to the <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+                        </label>
+</div>
+<!-- Submit Button -->
+<button class="mt-2 flex w-full cursor-pointer items-center justify-center rounded-lg h-12 px-5 bg-primary hover:bg-[#0fd650] transition-all text-[#112217] text-base font-bold tracking-[0.015em] shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)]" type="submit">
+                        Create Account
+                    </button>
+</form>
+<!-- Footer -->
+<div class="mt-8 text-center">
+<p class="text-sm text-[#92c9a4]">
+                        Already have an account? 
+                        <a class="text-white font-bold hover:text-primary transition-colors ml-1" href="#">Log In</a>
+</p>
+</div>
+<!-- Trust Badges -->
+<div class="mt-12 flex justify-center items-center gap-2 opacity-50 text-[#92c9a4] text-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Secure SSL Encryption</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>
+
+===Sign up page code end===
+
+===Login page code start===
+
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fitness Planner Login</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Lexend -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "input-bg": "#193322",
+                        "input-border": "#326744",
+                        "input-placeholder": "#92c9a4",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-background-dark">
+<div class="flex min-h-screen w-full">
+<!-- Left Side: Hero Image -->
+<div class="relative hidden w-1/2 lg:block bg-background-dark">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent z-10"></div>
+<div class="absolute inset-0 bg-background-dark/30 z-10"></div>
+<img class="absolute inset-0 h-full w-full object-cover grayscale-[20%]" data-alt="Athletic man lifting weights in a dark gym environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANf0rmTx_QDKa6dEbFoBwh3Q7girUCAUWi8O2iD-E7e5D7st4dUIts-v58-3aG5lCkxsk3IjHH_cqAhraLHepexp-MBnglJSMinqhhKRhBipGb60-ldiYdTqA-berP1aDZIF_3mAAQnHLvrb3aXxhfSyJQ0J_A52GBWCMUjqo9-NKg_gLm01FjMfGEbesQiQi6RQQudGae60o_ek7vqREljWYlVgyQxPmbnagrsHirL4wBzOfrvSHtdxM_eYqQFi-WQJIW-EZZSkU"/>
+<div class="absolute bottom-0 left-0 z-20 p-16">
+<blockquote class="border-l-4 border-primary pl-6">
+<p class="text-3xl font-bold leading-tight text-white">
+                        "The only bad workout is the one that didn't happen."
+                    </p>
+<footer class="mt-4 text-lg text-primary font-medium">
+                        — Track your progress daily
+                    </footer>
+</blockquote>
+</div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="flex w-full flex-col justify-center px-4 py-12 sm:px-12 lg:w-1/2 xl:px-24 bg-background-light dark:bg-background-dark">
+<div class="mx-auto w-full max-w-sm lg:w-96">
+<!-- Header / Logo -->
+<div class="mb-10 flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-[28px]">fitness_center</span>
+</div>
+<h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Fitness Planner</h2>
+</div>
+<!-- Titles -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white">Welcome Back</h1>
+<p class="mt-2 text-slate-600 dark:text-gray-400">Log in to track your weekly progress and crush your goals.</p>
+</div>
+<!-- Form -->
+<form action="#" class="space-y-5" method="POST">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-gray-200" for="email">
+                            Email address
+                        </label>
+<div class="relative">
+<input autocomplete="email" class="block w-full rounded-lg border-slate-300 dark:border-input-border bg-white dark:bg-input-bg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-input-placeholder focus:border-primary focus:ring-primary dark:focus:border-primary dark:focus:ring-primary sm:text-sm sm:leading-6 h-12 px-4 transition-colors" id="email" name="email" placeholder="user@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="block text-sm font-medium text-slate-700 dark:text-gray-200" for="password">
+                                Password
+                            </label>
+<div class="text-sm">
+<a class="font-medium text-primary hover:text-primary/80 transition-colors" href="#">
+                                    Forgot password?
+                                </a>
+</div>
+</div>
+<div class="relative flex items-center">
+<input autocomplete="current-password" class="block w-full rounded-lg border-slate-300 dark:border-input-border bg-white dark:bg-input-bg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-input-placeholder focus:border-primary focus:ring-primary dark:focus:border-primary dark:focus:ring-primary sm:text-sm sm:leading-6 h-12 px-4 pr-12 transition-colors" id="password" name="password" placeholder="••••••••••" required="" type="password"/>
+<div class="absolute right-0 flex h-full items-center pr-3">
+<span class="material-symbols-outlined cursor-pointer text-slate-400 dark:text-input-placeholder hover:text-primary transition-colors select-none" style="font-size: 20px;">visibility_off</span>
+</div>
+</div>
+</div>
+<!-- Login Button -->
+<div>
+<button class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-bold leading-6 text-background-dark shadow-sm hover:bg-[#0fd650] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors transform active:scale-[0.98]" type="submit">
+                            Log In
+                        </button>
+</div>
+</form>
+<!-- Social Login Divider -->
+<div class="mt-8">
+<div class="relative">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-slate-700"></div>
+</div>
+<div class="relative flex justify-center text-sm font-medium leading-6">
+<span class="bg-background-light dark:bg-background-dark px-4 text-slate-500 dark:text-slate-400">Or continue with</span>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-2 gap-4">
+<a class="flex w-full items-center justify-center gap-3 rounded-lg bg-white dark:bg-[#1E3A29] px-3 py-2.5 text-sm font-semibold text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-input-border hover:bg-slate-50 dark:hover:bg-[#254632] focus-visible:ring-transparent transition-all" href="#">
+<svg aria-hidden="true" class="h-5 w-5" viewbox="0 0 24 24">
+<path d="M12.0003 20.45c4.6667 0 8.45-3.7833 8.45-8.45 0-4.6667-3.7833-8.45-8.45-8.45-4.6667 0-8.45 3.7833-8.45 8.45 0 4.6667 3.7833 8.45 8.45 8.45Z" fill="#fff" fill-opacity="0" stroke="none"></path> <!-- Placeholder to maintain size if needed, actual paths below -->
+<path d="M23.49 12.275c0-.85-.075-1.675-.225-2.475H12v4.675h6.45c-.275 1.475-1.1 2.725-2.35 3.55v2.95h3.8c2.225-2.05 3.515-5.075 3.515-8.7z" fill="#4285F4"></path>
+<path d="M12 24c3.125 0 5.75-1.025 7.65-2.8l-3.8-2.95c-1.025.7-2.35 1.1-3.85 1.1-2.975 0-5.5-2-6.4-4.7H1.625v2.975C3.525 21.4 7.45 24 12 24z" fill="#34A853"></path>
+<path d="M5.6 14.65c-.225-.7-.375-1.45-.375-2.25s.15-1.55.375-2.25V7.175H1.625C.6 9.225 0 11.55 0 14s.6 4.775 1.625 6.825l3.975-2.975z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.7 0 3.225.575 4.425 1.725l3.325-3.325C17.75 1.3 15.125 0 12 0 7.45 0 3.525 2.6 1.625 6.375L5.6 9.35c.9-2.7 3.425-4.7 6.4-4.7z" fill="#EA4335"></path>
+</svg>
+<span class="text-sm font-medium">Google</span>
+</a>
+<a class="flex w-full items-center justify-center gap-3 rounded-lg bg-white dark:bg-[#1E3A29] px-3 py-2.5 text-sm font-semibold text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-input-border hover:bg-slate-50 dark:hover:bg-[#254632] focus-visible:ring-transparent transition-all" href="#">
+<svg aria-hidden="true" class="h-5 w-5 text-[#1877F2] dark:text-white" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-sm font-medium">Facebook</span>
+</a>
+</div>
+</div>
+<!-- Footer Sign Up -->
+<p class="mt-10 text-center text-sm text-slate-500 dark:text-gray-400">
+                    Don't have an account?
+                    <a class="font-bold leading-6 text-primary hover:text-primary/80 transition-colors" href="#">Sign up free</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>
+
+===Login page code end===
+
+===Dashboard page code start===
+
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitTrack Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec5b",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102216",
+                        "surface-dark": "#1c3326", // Slightly lighter than background-dark for cards
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="hidden md:flex flex-col w-64 h-full border-r border-[#23482f] bg-background-dark overflow-y-auto">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 bg-primary shadow-[0_0_15px_rgba(19,236,91,0.3)]" data-alt="Abstract green energy logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6pjJbziFgPW3sL6RrH56xO_0S6OHSDkxMke9Eb5UfLQHd9_gIVyTpQYuzflV9MeMSV1jnkO_S7ijMe1-5Trc6aQvjaIPjDxbBC6kby6PHWb2flTRlp5-O1-Mdn2x3ZqT0r5fbHE2c_3FsuaXk4xknMZrfpa0WjwZqhXDG___MwsPp7UJ65OwIcWLec7jECkEvZDHeXarNhQnpY7PaJu9Dfs5OiCcqZTzxd05Ui5UP5Xt-GdbEFtz5Xf4TbT46IjiyoZ_k_65-ywQ");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-normal tracking-tight">FitTrack</h1>
+<p class="text-primary text-xs font-medium leading-normal">Pro Plan</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/20 text-primary border border-primary/10" href="#">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill">dashboard</span>
+<p class="text-sm font-semibold leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<p class="text-sm font-medium leading-normal">Schedule</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+<p class="text-sm font-medium leading-normal">Exercises</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+<p class="text-sm font-medium leading-normal">Reports</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6">
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<p class="text-sm font-medium leading-normal">Log Out</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header -->
+<header class="flex-shrink-0 px-6 py-5 md:px-10 border-b border-[#23482f] bg-background-dark/95 backdrop-blur z-10">
+<div class="flex flex-wrap justify-between items-center gap-4">
+<div class="flex flex-col">
+<h2 class="text-white text-2xl md:text-3xl font-black leading-tight tracking-[-0.033em]">Good Evening, Alex</h2>
+<p class="text-[#92c9a4] text-sm font-normal leading-normal mt-1">Wednesday, Oct 25</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-2 bg-[#1c3326] px-3 py-1.5 rounded-full border border-[#23482f]">
+<span class="material-symbols-outlined text-primary text-sm">local_fire_department</span>
+<span class="text-white text-xs font-bold">5 Day Streak</span>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary hover:bg-[#0bda43] text-background-dark text-sm font-bold leading-normal tracking-[0.015em] transition-all shadow-[0_0_20px_rgba(19,236,91,0.2)]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">Log Workout</span>
+</button>
+<!-- Mobile Menu Button -->
+<button class="md:hidden p-2 text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 md:p-10 no-scrollbar">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-6">
+<!-- Row 1: Goal & Chart -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Weekly Goal Card -->
+<div class="lg:col-span-4 flex flex-col bg-surface-dark rounded-xl p-6 border border-[#23482f] shadow-sm">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-white text-lg font-bold">Weekly Goal</h3>
+<p class="text-[#92c9a4] text-sm">Keep pushing!</p>
+</div>
+<div class="bg-[#23482f] p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">flag</span>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex gap-6 justify-between items-end">
+<p class="text-4xl font-black text-white">3<span class="text-xl text-[#92c9a4] font-medium">/5</span></p>
+<p class="text-white text-sm font-medium bg-[#23482f] px-2 py-1 rounded">60%</p>
+</div>
+<div class="w-full bg-[#102216] rounded-full h-3">
+<div class="bg-primary h-3 rounded-full shadow-[0_0_10px_rgba(19,236,91,0.5)]" style="width: 60%"></div>
+</div>
+<p class="text-[#92c9a4] text-sm font-normal leading-normal mt-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">info</span>
+                                2 workouts left to hit your goal!
+                            </p>
+</div>
+</div>
+<!-- Activity Volume Chart -->
+<div class="lg:col-span-8 flex flex-col bg-surface-dark rounded-xl p-6 border border-[#23482f] shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-white text-lg font-bold">Activity Volume</h3>
+<p class="text-[#92c9a4] text-sm">Last 30 Days</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="text-white tracking-tight text-2xl font-bold">18,450 <span class="text-sm text-[#92c9a4] font-normal">kcal</span></p>
+<p class="text-primary text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                                </p>
+</div>
+</div>
+<!-- Custom CSS Chart -->
+<div class="flex-1 flex items-end justify-between gap-2 md:gap-4 min-h-[160px] pt-6">
+<!-- Bar 1 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
+<div class="w-full bg-primary/80 h-[60%]"></div>
+</div>
+<span class="text-[#92c9a4] text-xs font-medium">Week 1</span>
+</div>
+<!-- Bar 2 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
+<div class="w-full bg-primary/80 h-[45%]"></div>
+</div>
+<span class="text-[#92c9a4] text-xs font-medium">Week 2</span>
+</div>
+<!-- Bar 3 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
+<div class="w-full bg-primary h-[75%] shadow-[0_0_15px_rgba(19,236,91,0.2)]"></div>
+</div>
+<span class="text-white text-xs font-bold">Week 3</span>
+</div>
+<!-- Bar 4 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<div class="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
+<div class="w-full bg-primary/80 h-[55%]"></div>
+</div>
+<span class="text-[#92c9a4] text-xs font-medium">Week 4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Stats Grid -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+<!-- Stat 1 -->
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#92c9a4]">local_fire_department</span>
+<p class="text-[#92c9a4] text-sm font-medium">Calories</p>
+</div>
+<p class="text-white text-2xl font-bold">2,500 <span class="text-sm font-normal text-[#92c9a4]">kcal</span></p>
+<p class="text-primary text-xs font-medium">+5% from last week</p>
+</div>
+<!-- Stat 2 -->
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#92c9a4]">timer</span>
+<p class="text-[#92c9a4] text-sm font-medium">Active Time</p>
+</div>
+<p class="text-white text-2xl font-bold">320 <span class="text-sm font-normal text-[#92c9a4]">min</span></p>
+<p class="text-primary text-xs font-medium">+10% from last week</p>
+</div>
+<!-- Stat 3 -->
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#92c9a4]">map</span>
+<p class="text-[#92c9a4] text-sm font-medium">Distance</p>
+</div>
+<p class="text-white text-2xl font-bold">12.5 <span class="text-sm font-normal text-[#92c9a4]">km</span></p>
+<p class="text-primary text-xs font-medium">+2% from last week</p>
+</div>
+<!-- Stat 4 -->
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#92c9a4]">monitor_weight</span>
+<p class="text-[#92c9a4] text-sm font-medium">Weight</p>
+</div>
+<p class="text-white text-2xl font-bold">185 <span class="text-sm font-normal text-[#92c9a4]">lbs</span></p>
+<p class="text-[#fa5538] text-xs font-medium">-1% from last week</p>
+</div>
+</div>
+<!-- Row 3: Recent & Widgets -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Recent Workouts List -->
+<div class="lg:col-span-7 flex flex-col bg-surface-dark rounded-xl border border-[#23482f] overflow-hidden">
+<div class="p-6 border-b border-[#23482f] flex justify-between items-center">
+<h3 class="text-white text-lg font-bold">Recent Workouts</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="flex flex-col">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
+<div class="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined">directions_run</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white text-base font-medium truncate">Morning Run</h4>
+<p class="text-[#92c9a4] text-sm truncate">Cardio • 5.2 km</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-white text-sm font-bold">45 min</p>
+<p class="text-[#92c9a4] text-xs">Today</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
+<div class="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white text-base font-medium truncate">Upper Body Power</h4>
+<p class="text-[#92c9a4] text-sm truncate">Strength • Chest &amp; Back</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-white text-sm font-bold">60 min</p>
+<p class="text-[#92c9a4] text-xs">Yesterday</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
+<div class="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined">self_improvement</span>
+</div>
+<div class="flex-1 min-w-0">
+<h4 class="text-white text-base font-medium truncate">Recovery Yoga</h4>
+<p class="text-[#92c9a4] text-sm truncate">Mobility • Full Body</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-white text-sm font-bold">30 min</p>
+<p class="text-[#92c9a4] text-xs">Oct 23</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Widgets Column -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Next Workout Widget -->
+<div class="bg-surface-dark rounded-xl p-6 border border-[#23482f] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-white">calendar_month</span>
+</div>
+<h3 class="text-[#92c9a4] text-sm font-medium mb-1 uppercase tracking-wider">Up Next</h3>
+<h4 class="text-white text-xl font-bold mb-4">Leg Day Hypertrophy</h4>
+<div class="flex gap-4 mb-6">
+<div class="flex items-center gap-2 text-sm text-white bg-[#23482f] px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-sm text-primary">schedule</span>
+                                    5:30 PM
+                                </div>
+<div class="flex items-center gap-2 text-sm text-white bg-[#23482f] px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-sm text-primary">timer</span>
+                                    75 min
+                                </div>
+</div>
+<button class="w-full py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-background-dark font-bold text-sm transition-colors">
+                                View Details
+                            </button>
+</div>
+<!-- Motivation Widget -->
+<div class="flex-1 bg-gradient-to-br from-primary/20 to-surface-dark rounded-xl p-6 border border-primary/20 flex flex-col justify-center items-center text-center relative overflow-hidden">
+<!-- Background Image for texture -->
+<div class="absolute inset-0 opacity-10 bg-cover bg-center" data-alt="Abstract gym texture background" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCjriuCjYxoq6_GuhUVSzoEhkb-SfzAzatJIhB01g_KFLMwQD5n6KNVWPZxBYA14HrElBg3kVv-ynvS3a43iyO-zbwnQOyTmptqZe89tQmb0MVL7HxFqZ8-sYts1eLRNlH7GSxtfuMJbN9o5DwWDrs8uR6hd9HDOC3kv8SdaLRZ9le3gSoVyTZaYaz6vh0FTj_ZCq7LOaMAhRhEVGXkALG1ACtkNHbtaBFo0sGXDHJNeOiRvVdBwz4u_U2K7rE6wY2l-X1emCnd9Bc');"></div>
+<div class="relative z-10">
+<div class="size-12 rounded-full bg-primary flex items-center justify-center text-background-dark mx-auto mb-4 shadow-[0_0_15px_rgba(19,236,91,0.5)]">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+<p class="text-white text-lg font-bold italic">"The only bad workout is the one that didn't happen."</p>
+<p class="text-[#92c9a4] text-sm mt-2 font-medium">Keep crushing it, Alex!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="mt-10 mb-6 text-center">
+<p class="text-[#92c9a4]/50 text-xs">© 2023 FitTrack. All rights reserved.</p>
+</footer>
+</div>
+</main>
+</body></html>
+
+===Dashboard page code end===
+

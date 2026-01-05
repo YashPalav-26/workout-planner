@@ -11,13 +11,25 @@ const Signup = () => {
     });
     const navigate = useNavigate();
 
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [passwordStrength, setPasswordStrength] = useState(0);
+
+    const calculatePasswordStrength = (password) => {
+        if (password.length === 0) return 0;
+        if (password.length < 8) return 1; 
+        if (password.length < 12) return 2; 
+        if (password.length < 16) return 3; 
+        return 4; 
+    };
+
     const { firstName, lastName, email, password } = formData;
 
-    const onChange = e => setFormData({ ...formData, [e.target.type === 'checkbox' ? 'checked' : e.target.id || e.target.type]: e.target.value });
-
-    // Fix for form data mapping since structure is slightly different in inputs
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        if (name === 'password') {
+            setPasswordStrength(calculatePasswordStrength(value));
+        }
     };
 
     const onSubmit = async e => {
@@ -28,7 +40,6 @@ const Signup = () => {
                     'Content-Type': 'application/json'
                 }
             };
-            // Assuming backend is on port 5000, may need proxy in vite config
             const body = JSON.stringify({ firstName, lastName, email, password });
             const res = await axios.post('http://localhost:5000/api/auth/signup', body, config);
 
@@ -43,9 +54,7 @@ const Signup = () => {
 
     return (
         <div className="min-h-screen flex flex-col lg:flex-row font-display bg-background-dark text-white">
-            {/* Left Side: Visual/Hero */}
             <div className="relative hidden lg:flex w-full lg:w-1/2 bg-surface-dark flex-col justify-between p-12 overflow-hidden">
-                {/* Hero Image */}
                 <div className="absolute inset-0 z-0">
                     <img
                         src="/imgs/signup-img.png"
@@ -55,9 +64,7 @@ const Signup = () => {
                     <div className="absolute inset-0 bg-background-dark/40 mix-blend-multiply"></div>
                     <div className="absolute inset-0 bg-linear-to-t from-background-dark via-background-dark/20 to-transparent"></div>
                 </div>
-                {/* Logo Area */}
 
-                {/* Hero Text */}
                 <div className="relative z-10 mt-auto max-w-lg">
                     <h1 className="text-4xl lg:text-5xl font-black leading-tight tracking-[-0.02em] mb-4">
                         Unlock Your <br />
@@ -105,17 +112,17 @@ const Signup = () => {
                         <div className="space-y-1">
                             <label className="text-white text-xs font-medium ml-1">Password</label>
                             <div className="relative">
-                                <input name="password" value={password} onChange={handleChange} className="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-input-border bg-input-bg focus:border-primary h-10 pl-3 pr-9 placeholder:text-input-placeholder/50 text-sm" placeholder="Min. 8 chars" type="password" required />
-                                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-input-placeholder hover:text-white transition-colors flex items-center justify-center" type="button">
-                                    <span className="material-symbols-outlined text-[18px]">visibility_off</span>
+                                <input name="password" value={password} onChange={handleChange} className="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-input-border bg-input-bg focus:border-primary h-10 pl-3 pr-9 placeholder:text-input-placeholder/50 text-sm" placeholder="Min. 8 chars" type={passwordVisible ? 'text' : 'password'} required />
+                                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-input-placeholder hover:text-white transition-colors flex items-center justify-center" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
+                                    <span className="material-symbols-outlined text-[18px]">{passwordVisible ? 'visibility' : 'visibility_off'}</span>
                                 </button>
                             </div>
                             {/* Password Strength Indicator */}
                             <div className="flex gap-1 mt-2 h-1 w-full">
-                                <div className="h-full w-1/4 bg-red-500 rounded-full"></div>
-                                <div className="h-full w-1/4 bg-input-border rounded-full"></div>
-                                <div className="h-full w-1/4 bg-input-border rounded-full"></div>
-                                <div className="h-full w-1/4 bg-input-border rounded-full"></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 1 ? (passwordStrength === 1 ? 'bg-red-500' : passwordStrength === 2 ? 'bg-orange-500' : passwordStrength === 3 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-input-border'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 2 ? (passwordStrength === 2 ? 'bg-orange-500' : passwordStrength === 3 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-input-border'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 3 ? (passwordStrength === 3 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-input-border'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 4 ? 'bg-green-500' : 'bg-input-border'}`}></div>
                             </div>
                         </div>
 

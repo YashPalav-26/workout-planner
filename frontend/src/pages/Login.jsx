@@ -7,6 +7,7 @@ const Login = () => {
         email: '',
         password: ''
     });
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const { email, password } = formData;
@@ -37,10 +38,8 @@ const Login = () => {
 
     return (
         <div className="flex min-h-screen w-full font-display bg-background-dark text-white">
-            {/* Left Side: Hero Image */}
             <div className="relative hidden w-1/2 lg:block bg-background-dark overflow-hidden">
                 <div className="absolute inset-0 bg-linear-to-t from-background-dark via-transparent to-transparent z-10"></div>
-                {/* Hero Image */}
                 <div className="absolute inset-0">
                     <img
                         src="/imgs/workout img.jpg"
@@ -63,8 +62,6 @@ const Login = () => {
             {/* Right Side: Login Form */}
             <div className="flex w-full flex-col justify-center px-6 py-10 sm:px-12 lg:w-1/2 xl:px-16 bg-surface-dark">
                 <div className="mx-auto w-full max-w-sm">
-                    {/* Header / Logo */}
-
                     {/* Titles */}
                     <div className="mb-6">
                         <h1 className="text-2xl font-bold text-white">Welcome Back</h1>
@@ -94,9 +91,9 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="relative flex items-center">
-                                <input autoComplete="current-password" className="block w-full rounded-lg border border-input-border bg-input-bg text-white placeholder:text-input-placeholder/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-0 sm:text-sm h-11 px-3 pr-10 transition-colors" id="password" name="password" placeholder="••••••••••" required type="password" value={password} onChange={handleChange} />
+                                <input autoComplete="current-password" className="block w-full rounded-lg border border-input-border bg-input-bg text-white placeholder:text-input-placeholder/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-0 sm:text-sm h-11 px-3 pr-10 transition-colors" id="password" name="password" placeholder="••••••••••" required type={showPassword ? "text" : "password"} value={password} onChange={handleChange} />
                                 <div className="absolute right-0 flex h-full items-center pr-3">
-                                    <span className="material-symbols-outlined cursor-pointer text-input-placeholder hover:text-white transition-colors select-none" style={{ fontSize: '18px' }}>visibility_off</span>
+                                    <span className="material-symbols-outlined cursor-pointer text-input-placeholder hover:text-white transition-colors select-none" style={{ fontSize: '18px' }} onClick={() => setShowPassword(!showPassword)}>{showPassword ? 'visibility' : 'visibility_off'}</span>
                                 </div>
                             </div>
                         </div>

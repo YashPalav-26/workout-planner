@@ -72,7 +72,6 @@ const Home = () => {
                     </div>
                 </section>
 
-                {/* Features Section */}
                 <section className="px-4 md:px-40 flex flex-1 justify-center py-5 bg-[#14281c] border-y border-input-border" id="features">
                     <div className="flex flex-col max-w-[960px] flex-1 w-full">
                         <div className="flex flex-col gap-10 px-4 py-16 @container">
@@ -120,8 +119,7 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-
-                {/* Showcase / Card Section */}
+                
                 <section className="px-4 md:px-40 flex flex-1 justify-center py-5">
                     <div className="flex flex-col max-w-[960px] flex-1 w-full">
                         <div className="p-4 py-12 @container">

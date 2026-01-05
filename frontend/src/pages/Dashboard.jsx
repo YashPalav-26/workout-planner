@@ -79,10 +79,8 @@ const Dashboard = () => {
                     </div>
                 </header>
 
-                {/* Scrollable Content */}
                 <div className="flex-1 overflow-y-auto p-6 md:p-10 no-scrollbar">
                     <div className="max-w-[1200px] mx-auto flex flex-col gap-6">
-                        {/* Row 1: Goal & Chart */}
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                             {/* Weekly Goal Card */}
                             <div className="lg:col-span-4 flex flex-col bg-surface-dark rounded-xl p-6 border border-[#23482f] shadow-sm">
@@ -109,7 +107,6 @@ const Dashboard = () => {
                                     </p>
                                 </div>
                             </div>
-                            {/* Activity Volume Chart */}
                             <div className="lg:col-span-8 flex flex-col bg-surface-dark rounded-xl p-6 border border-[#23482f] shadow-sm">
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
@@ -123,30 +120,25 @@ const Dashboard = () => {
                                         </p>
                                     </div>
                                 </div>
-                                {/* Custom CSS Chart */}
                                 <div className="flex-1 flex items-end justify-between gap-2 md:gap-4 min-h-[160px] pt-6">
-                                    {/* Bar 1 */}
                                     <div className="flex flex-col items-center gap-2 flex-1 group">
                                         <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
                                             <div className="w-full bg-primary/80 h-[60%]"></div>
                                         </div>
                                         <span className="text-[#92c9a4] text-xs font-medium">Week 1</span>
                                     </div>
-                                    {/* Bar 2 */}
                                     <div className="flex flex-col items-center gap-2 flex-1 group">
                                         <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
                                             <div className="w-full bg-primary/80 h-[45%]"></div>
                                         </div>
                                         <span className="text-[#92c9a4] text-xs font-medium">Week 2</span>
                                     </div>
-                                    {/* Bar 3 */}
                                     <div className="flex flex-col items-center gap-2 flex-1 group">
                                         <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
                                             <div className="w-full bg-primary h-[75%] shadow-[0_0_15px_rgba(19,236,91,0.2)]"></div>
                                         </div>
                                         <span className="text-white text-xs font-bold">Week 3</span>
                                     </div>
-                                    {/* Bar 4 */}
                                     <div className="flex flex-col items-center gap-2 flex-1 group">
                                         <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
                                             <div className="w-full bg-primary/80 h-[55%]"></div>
@@ -157,9 +149,7 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        {/* Row 2: Stats Grid */}
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                            {/* Stat 1 */}
                             <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
                                 <div className="flex items-center gap-2 mb-1">
                                     <span className="material-symbols-outlined text-[#92c9a4]">local_fire_department</span>
@@ -168,7 +158,6 @@ const Dashboard = () => {
                                 <p className="text-white text-2xl font-bold">2,500 <span className="text-sm font-normal text-[#92c9a4]">kcal</span></p>
                                 <p className="text-primary text-xs font-medium">+5% from last week</p>
                             </div>
-                            {/* Stat 2 */}
                             <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
                                 <div className="flex items-center gap-2 mb-1">
                                     <span className="material-symbols-outlined text-[#92c9a4]">timer</span>
@@ -177,7 +166,6 @@ const Dashboard = () => {
                                 <p className="text-white text-2xl font-bold">320 <span className="text-sm font-normal text-[#92c9a4]">min</span></p>
                                 <p className="text-primary text-xs font-medium">+10% from last week</p>
                             </div>
-                            {/* Stat 3 */}
                             <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
                                 <div className="flex items-center gap-2 mb-1">
                                     <span className="material-symbols-outlined text-[#92c9a4]">map</span>
@@ -186,7 +174,6 @@ const Dashboard = () => {
                                 <p className="text-white text-2xl font-bold">12.5 <span className="text-sm font-normal text-[#92c9a4]">km</span></p>
                                 <p className="text-primary text-xs font-medium">+2% from last week</p>
                             </div>
-                            {/* Stat 4 */}
                             <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
                                 <div className="flex items-center gap-2 mb-1">
                                     <span className="material-symbols-outlined text-[#92c9a4]">monitor_weight</span>
@@ -197,16 +184,13 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        {/* Row 3: Recent & Widgets */}
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                            {/* Recent Workouts List */}
                             <div className="lg:col-span-7 flex flex-col bg-surface-dark rounded-xl border border-[#23482f] overflow-hidden">
                                 <div className="p-6 border-b border-[#23482f] flex justify-between items-center">
                                     <h3 className="text-white text-lg font-bold">Recent Workouts</h3>
                                     <a className="text-primary text-sm font-bold hover:underline" href="#">View All</a>
                                 </div>
                                 <div className="flex flex-col">
-                                    {/* Item 1 */}
                                     <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
                                         <div className="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
                                             <span className="material-symbols-outlined">directions_run</span>
@@ -220,7 +204,6 @@ const Dashboard = () => {
                                             <p className="text-[#92c9a4] text-xs">Today</p>
                                         </div>
                                     </div>
-                                    {/* Item 2 */}
                                     <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
                                         <div className="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
                                             <span className="material-symbols-outlined">fitness_center</span>
@@ -233,9 +216,7 @@ const Dashboard = () => {
                                             <p className="text-white text-sm font-bold">60 min</p>
                                             <p className="text-[#92c9a4] text-xs">Yesterday</p>
                                         </div>
-                                    </div>
-                                    {/* Item 3 */}
-                                    <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
+                                    </div>                                 <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
                                         <div className="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
                                             <span className="material-symbols-outlined">self_improvement</span>
                                         </div>
@@ -250,9 +231,7 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* Widgets Column */}
                             <div className="lg:col-span-5 flex flex-col gap-6">
-                                {/* Next Workout Widget */}
                                 <div className="bg-surface-dark rounded-xl p-6 border border-[#23482f] relative overflow-hidden group">
                                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                         <span className="material-symbols-outlined text-8xl text-white">calendar_month</span>
@@ -273,9 +252,7 @@ const Dashboard = () => {
                                         View Details
                                     </button>
                                 </div>
-                                {/* Motivation Widget */}
                                 <div className="flex-1 bg-linear-to-br from-primary/20 to-surface-dark rounded-xl p-6 border border-primary/20 flex flex-col justify-center items-center text-center relative overflow-hidden">
-                                    {/* CSS Pattern for texture */}
                                     <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '16px 16px' }}></div>
                                     <div className="relative z-10">
                                         <div className="size-12 rounded-full bg-primary flex items-center justify-center text-background-dark mx-auto mb-4 shadow-[0_0_15px_rgba(19,236,91,0.5)]">

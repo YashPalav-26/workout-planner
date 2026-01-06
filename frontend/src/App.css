@@ -1,0 +1,8 @@
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+    .grid-dense {
+        grid-auto-flow: dense;
+    }
+}

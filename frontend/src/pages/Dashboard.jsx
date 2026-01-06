@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/SideBar.jsx';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -9,265 +10,264 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display">
-            {/* Sidebar */}
-            <aside className="hidden md:flex flex-col w-64 h-full border-r border-[#23482f] bg-background-dark overflow-y-auto">
-                <div className="p-6">
-                    <div className="flex items-center gap-3 mb-8">
-                        <div className="flex items-center justify-center rounded-full size-10 bg-linear-to-br from-primary to-[#0bda43] shadow-[0_0_15px_rgba(19,236,91,0.3)] text-background-dark">
-                            <span className="material-symbols-outlined">person</span>
-                        </div>
-                        <div className="flex flex-col">
-                            <h1 className="text-white text-lg font-bold leading-normal tracking-tight">FitTrack</h1>
-                            <p className="text-primary text-xs font-medium leading-normal">Pro Plan</p>
-                        </div>
-                    </div>
-                    <nav className="flex flex-col gap-2">
-                        <a className="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/20 text-primary border border-primary/10" href="#">
-                            <span className="material-symbols-outlined text-[20px]">dashboard</span>
-                            <p className="text-sm font-semibold leading-normal">Dashboard</p>
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
-                            <span className="material-symbols-outlined text-[20px]">calendar_today</span>
-                            <p className="text-sm font-medium leading-normal">Schedule</p>
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
-                            <span className="material-symbols-outlined text-[20px]">fitness_center</span>
-                            <p className="text-sm font-medium leading-normal">Exercises</p>
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
-                            <span className="material-symbols-outlined text-[20px]">pie_chart</span>
-                            <p className="text-sm font-medium leading-normal">Reports</p>
-                        </a>
-                        <a className="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white transition-colors" href="#">
-                            <span className="material-symbols-outlined text-[20px]">settings</span>
-                            <p className="text-sm font-medium leading-normal">Settings</p>
-                        </a>
-                    </nav>
-                </div>
-                <div className="mt-auto p-6">
-                    <div onClick={handleLogout} className="flex items-center gap-3 px-3 py-3 rounded-lg text-[#92c9a4] hover:bg-[#23482f] hover:text-white cursor-pointer transition-colors">
-                        <span className="material-symbols-outlined text-[20px]">logout</span>
-                        <p className="text-sm font-medium leading-normal">Log Out</p>
-                    </div>
-                </div>
-            </aside>
+        <div className="bg-background-dark text-text-main overflow-hidden h-screen flex transition-colors duration-300 antialiased">
+            <Sidebar handleLogout={handleLogout} />
 
             {/* Main Content */}
-            <main className="flex-1 flex flex-col h-full overflow-hidden relative">
-                {/* Header */}
-                <header className="shrink-0 px-6 py-5 md:px-10 border-b border-[#23482f] bg-background-dark/95 backdrop-blur z-10">
-                    <div className="flex flex-wrap justify-between items-center gap-4">
-                        <div className="flex flex-col">
-                            <h2 className="text-white text-2xl md:text-3xl font-black leading-tight tracking-[-0.033em]">Good Evening, Alex</h2>
-                            <p className="text-[#92c9a4] text-sm font-normal leading-normal mt-1">Wednesday, Oct 25</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="hidden md:flex items-center gap-2 bg-[#1c3326] px-3 py-1.5 rounded-full border border-[#23482f]">
-                                <span className="material-symbols-outlined text-primary text-sm">local_fire_department</span>
-                                <span className="text-white text-xs font-bold">5 Day Streak</span>
+            <main className="flex-1 flex flex-col h-full overflow-hidden bg-background-dark">
+                <header className="flex-shrink-0 px-8 py-8 md:px-12 bg-background-dark z-20 flex items-center justify-between">
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-text-main tracking-tight mb-1">Dashboard</h2>
+                        <p className="text-text-secondary font-medium">Your weekly performance at a glance.</p>
+                    </div>
+                    <div className="flex items-center gap-4 md:gap-8">
+                        <div className="hidden md:flex items-center gap-2">
+                            <span className="material-symbols-outlined text-orange-500 text-[24px]" data-weight="fill">local_fire_department</span>
+                            <div className="flex flex-col">
+                                <span className="text-sm font-bold text-text-main leading-none">5 Days</span>
+                                <span className="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Streak</span>
                             </div>
-                            <button className="flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-primary hover:bg-[#0bda43] text-background-dark text-sm font-bold leading-normal tracking-[0.015em] transition-all shadow-[0_0_20px_rgba(19,236,91,0.2)]">
-                                <span className="material-symbols-outlined text-[20px]">add</span>
-                                <span className="truncate">Log Workout</span>
+                        </div>
+                        <div className="h-8 w-[1px] bg-border-subtle hidden md:block"></div>
+                        <div className="flex items-center gap-4">
+                            <button className="size-10 rounded-full flex items-center justify-center text-text-main hover:bg-surface transition-all relative">
+                                <span className="absolute top-2 right-2.5 size-2 bg-red-500 rounded-full border border-background-dark"></span>
+                                <span className="material-symbols-outlined text-[24px]">notifications</span>
                             </button>
-                            {/* Mobile Menu Button */}
-                            <button className="md:hidden p-2 text-white">
+                            <button className="md:hidden p-2 text-text-main">
                                 <span className="material-symbols-outlined">menu</span>
                             </button>
                         </div>
                     </div>
                 </header>
 
-                <div className="flex-1 overflow-y-auto p-6 md:p-10 no-scrollbar">
-                    <div className="max-w-[1200px] mx-auto flex flex-col gap-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                            {/* Weekly Goal Card */}
-                            <div className="lg:col-span-4 flex flex-col bg-surface-dark rounded-xl p-6 border border-[#23482f] shadow-sm">
-                                <div className="flex justify-between items-start mb-6">
-                                    <div>
-                                        <h3 className="text-white text-lg font-bold">Weekly Goal</h3>
-                                        <p className="text-[#92c9a4] text-sm">Keep pushing!</p>
-                                    </div>
-                                    <div className="bg-[#23482f] p-2 rounded-lg">
-                                        <span className="material-symbols-outlined text-primary">flag</span>
-                                    </div>
+                <div className="flex-1 overflow-y-auto px-8 pb-8 md:px-12 md:pb-12 no-scrollbar">
+                    <div className="max-w-[1600px] mx-auto flex flex-col gap-8">
+                        {/* Metric Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                            <div className="bg-surface p-8 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 group cursor-default flex flex-col justify-between h-48 md:h-56 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
+                                    <span className="material-symbols-outlined text-[120px]">local_fire_department</span>
                                 </div>
-                                <div className="flex flex-col gap-4">
-                                    <div className="flex gap-6 justify-between items-end">
-                                        <p className="text-4xl font-black text-white">3<span className="text-xl text-[#92c9a4] font-medium">/5</span></p>
-                                        <p className="text-white text-sm font-medium bg-[#23482f] px-2 py-1 rounded">60%</p>
+                                <div className="flex justify-between items-start z-10">
+                                    <div className="flex items-center gap-2 text-text-secondary font-bold text-sm uppercase tracking-wider">
+                                        <span className="material-symbols-outlined text-[20px]">local_fire_department</span>
+                                        Calories
                                     </div>
-                                    <div className="w-full bg-[#102216] rounded-full h-3">
-                                        <div className="bg-primary h-3 rounded-full shadow-[0_0_10px_rgba(19,236,91,0.5)]" style={{ width: '60%' }}></div>
-                                    </div>
-                                    <p className="text-[#92c9a4] text-sm font-normal leading-normal mt-2 flex items-center gap-2">
-                                        <span className="material-symbols-outlined text-sm">info</span>
-                                        2 workouts left to hit your goal!
-                                    </p>
+                                    <span className="flex items-center gap-1 text-xs font-bold text-green-500 bg-green-900/30 px-2 py-1 rounded-md">
+                                        <span className="material-symbols-outlined text-[14px]">trending_up</span> 5.2%
+                                    </span>
+                                </div>
+                                <div className="z-10">
+                                    <h3 className="text-5xl lg:text-6xl font-extrabold text-text-main tracking-tighter mb-1">2,450</h3>
+                                    <p className="text-text-secondary font-medium">kcal burned today</p>
                                 </div>
                             </div>
-                            <div className="lg:col-span-8 flex flex-col bg-surface-dark rounded-xl p-6 border border-[#23482f] shadow-sm">
-                                <div className="flex justify-between items-start mb-4">
-                                    <div>
-                                        <h3 className="text-white text-lg font-bold">Activity Volume</h3>
-                                        <p className="text-[#92c9a4] text-sm">Last 30 Days</p>
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <p className="text-white tracking-tight text-2xl font-bold">18,450 <span className="text-sm text-[#92c9a4] font-normal">kcal</span></p>
-                                        <p className="text-primary text-sm font-medium flex items-center gap-1">
-                                            <span className="material-symbols-outlined text-sm">trending_up</span> +12%
-                                        </p>
-                                    </div>
+
+                            <div className="bg-surface p-8 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 group cursor-default flex flex-col justify-between h-48 md:h-56 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
+                                    <span className="material-symbols-outlined text-[120px]">timer</span>
                                 </div>
-                                <div className="flex-1 flex items-end justify-between gap-2 md:gap-4 min-h-[160px] pt-6">
-                                    <div className="flex flex-col items-center gap-2 flex-1 group">
-                                        <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
-                                            <div className="w-full bg-primary/80 h-[60%]"></div>
-                                        </div>
-                                        <span className="text-[#92c9a4] text-xs font-medium">Week 1</span>
+                                <div className="flex justify-between items-start z-10">
+                                    <div className="flex items-center gap-2 text-text-secondary font-bold text-sm uppercase tracking-wider">
+                                        <span className="material-symbols-outlined text-[20px]">timer</span>
+                                        Active Time
                                     </div>
-                                    <div className="flex flex-col items-center gap-2 flex-1 group">
-                                        <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
-                                            <div className="w-full bg-primary/80 h-[45%]"></div>
-                                        </div>
-                                        <span className="text-[#92c9a4] text-xs font-medium">Week 2</span>
+                                    <span className="flex items-center gap-1 text-xs font-bold text-green-500 bg-green-900/30 px-2 py-1 rounded-md">
+                                        <span className="material-symbols-outlined text-[14px]">trending_up</span> 12%
+                                    </span>
+                                </div>
+                                <div className="z-10">
+                                    <h3 className="text-5xl lg:text-6xl font-extrabold text-text-main tracking-tighter mb-1">320</h3>
+                                    <p className="text-text-secondary font-medium">minutes this week</p>
+                                </div>
+                            </div>
+
+                            <div className="bg-surface p-8 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 group cursor-default flex flex-col justify-between h-48 md:h-56 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
+                                    <span className="material-symbols-outlined text-[120px]">monitor_weight</span>
+                                </div>
+                                <div className="flex justify-between items-start z-10">
+                                    <div className="flex items-center gap-2 text-text-secondary font-bold text-sm uppercase tracking-wider">
+                                        <span className="material-symbols-outlined text-[20px]">monitor_weight</span>
+                                        Current Weight
                                     </div>
-                                    <div className="flex flex-col items-center gap-2 flex-1 group">
-                                        <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
-                                            <div className="w-full bg-primary h-[75%] shadow-[0_0_15px_rgba(19,236,91,0.2)]"></div>
-                                        </div>
-                                        <span className="text-white text-xs font-bold">Week 3</span>
-                                    </div>
-                                    <div className="flex flex-col items-center gap-2 flex-1 group">
-                                        <div className="w-full bg-[#23482f] rounded-t-sm relative h-full flex items-end group-hover:bg-[#2c583b] transition-colors overflow-hidden">
-                                            <div className="w-full bg-primary/80 h-[55%]"></div>
-                                        </div>
-                                        <span className="text-[#92c9a4] text-xs font-medium">Week 4</span>
-                                    </div>
+                                    <span className="flex items-center gap-1 text-xs font-bold text-green-500 bg-green-900/30 px-2 py-1 rounded-md">
+                                        <span className="material-symbols-outlined text-[14px]">arrow_downward</span> 1.5%
+                                    </span>
+                                </div>
+                                <div className="z-10">
+                                    <h3 className="text-5xl lg:text-6xl font-extrabold text-text-main tracking-tighter mb-1">185</h3>
+                                    <p className="text-text-secondary font-medium">lbs recorded</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                            <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="material-symbols-outlined text-[#92c9a4]">local_fire_department</span>
-                                    <p className="text-[#92c9a4] text-sm font-medium">Calories</p>
+                        {/* Activity Overview and Weekly Goal */}
+                        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+                            <div className="xl:col-span-2 bg-surface rounded-3xl shadow-card p-8 flex flex-col">
+                                <div className="flex justify-between items-end mb-10">
+                                    <div>
+                                        <h3 className="text-xl font-bold text-text-main mb-1">Activity Overview</h3>
+                                        <p className="text-sm text-text-secondary">Intensity vs Volume over the last 7 days</p>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button className="px-4 py-2 text-xs font-bold rounded-lg bg-primary text-background-dark">Weekly</button>
+                                        <button className="px-4 py-2 text-xs font-bold rounded-lg text-text-secondary hover:bg-surface-highlight transition-colors">Monthly</button>
+                                    </div>
                                 </div>
-                                <p className="text-white text-2xl font-bold">2,500 <span className="text-sm font-normal text-[#92c9a4]">kcal</span></p>
-                                <p className="text-primary text-xs font-medium">+5% from last week</p>
+                                <div className="flex-1 flex items-end justify-between gap-4 h-[250px] w-full px-2">
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[40%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">Mon</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[65%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">Tue</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-primary group-hover:bg-primary-dark h-[85%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-primary">Wed</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[45%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">Thu</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[60%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">Fri</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-surface-highlight h-[30%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">Sat</span>
+                                    </div>
+                                    <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
+                                        <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
+                                            <div className="w-full bg-surface-highlight h-[20%] rounded-xl transition-all duration-500 ease-out"></div>
+                                        </div>
+                                        <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">Sun</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="material-symbols-outlined text-[#92c9a4]">timer</span>
-                                    <p className="text-[#92c9a4] text-sm font-medium">Active Time</p>
+
+                            <div className="bg-surface rounded-3xl shadow-card p-8 flex flex-col items-center justify-center relative overflow-hidden">
+                                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+                                <div className="w-full flex justify-between items-start mb-6">
+                                    <div>
+                                        <h3 className="text-xl font-bold text-text-main mb-1">Weekly Goal</h3>
+                                        <p className="text-sm text-text-secondary">Workouts completed</p>
+                                    </div>
+                                    <div className="p-2 bg-surface-highlight rounded-lg">
+                                        <span className="material-symbols-outlined text-[20px] text-text-main">flag</span>
+                                    </div>
                                 </div>
-                                <p className="text-white text-2xl font-bold">320 <span className="text-sm font-normal text-[#92c9a4]">min</span></p>
-                                <p className="text-primary text-xs font-medium">+10% from last week</p>
-                            </div>
-                            <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="material-symbols-outlined text-[#92c9a4]">map</span>
-                                    <p className="text-[#92c9a4] text-sm font-medium">Distance</p>
+                                <div className="relative size-56 flex items-center justify-center">
+                                    <svg className="size-full -rotate-90 transform transition-all duration-1000" viewBox="0 0 36 36">
+                                        <path className="text-surface-highlight" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2"></path>
+                                        <path className="text-primary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="60, 100" stroke-linecap="round" stroke-width="2"></path>
+                                    </svg>
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span className="text-6xl font-extrabold text-text-main tracking-tight">3<span className="text-2xl text-text-secondary font-bold">/5</span></span>
+                                    </div>
                                 </div>
-                                <p className="text-white text-2xl font-bold">12.5 <span className="text-sm font-normal text-[#92c9a4]">km</span></p>
-                                <p className="text-primary text-xs font-medium">+2% from last week</p>
-                            </div>
-                            <div className="flex flex-col gap-2 rounded-xl p-5 bg-surface-dark border border-[#23482f]">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="material-symbols-outlined text-[#92c9a4]">monitor_weight</span>
-                                    <p className="text-[#92c9a4] text-sm font-medium">Weight</p>
+                                <div className="mt-6 text-center">
+                                    <p className="text-sm font-medium text-text-secondary">You're <span className="text-primary font-bold">60%</span> of the way there.</p>
+                                    <button className="mt-4 text-xs font-bold text-primary hover:text-primary-dark uppercase tracking-widest transition-colors">Update Goal</button>
                                 </div>
-                                <p className="text-white text-2xl font-bold">185 <span className="text-sm font-normal text-[#92c9a4]">lbs</span></p>
-                                <p className="text-[#fa5538] text-xs font-medium">-1% from last week</p>
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                            <div className="lg:col-span-7 flex flex-col bg-surface-dark rounded-xl border border-[#23482f] overflow-hidden">
-                                <div className="p-6 border-b border-[#23482f] flex justify-between items-center">
-                                    <h3 className="text-white text-lg font-bold">Recent Workouts</h3>
-                                    <a className="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+                        {/* Up Next and Recent Workouts */}
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 pb-4">
+                            <div className="bg-surface rounded-3xl shadow-card p-8 flex flex-col relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-full pointer-events-none transition-opacity group-hover:opacity-70"></div>
+                                <div className="flex items-center gap-3 mb-6 relative z-10">
+                                    <span className="relative flex h-3 w-3">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                                    </span>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest text-text-secondary">Up Next</h3>
                                 </div>
-                                <div className="flex flex-col">
-                                    <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
-                                        <div className="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
+                                <h2 className="text-3xl font-bold text-text-main mb-2 relative z-10 group-hover:text-primary transition-colors">Leg Day Hypertrophy</h2>
+                                <p className="text-text-secondary font-medium mb-8 max-w-md relative z-10">Focus on quads and calves today. Don't skip the warm-up set!</p>
+                                <div className="flex gap-4 mb-8 relative z-10">
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] uppercase font-bold text-text-secondary tracking-wider mb-1">Time</span>
+                                        <span className="text-lg font-bold text-text-main">5:30 PM</span>
+                                    </div>
+                                    <div className="w-px h-10 bg-border-subtle"></div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[10px] uppercase font-bold text-text-secondary tracking-wider mb-1">Duration</span>
+                                        <span className="text-lg font-bold text-text-main">75 min</span>
+                                    </div>
+                                </div>
+                                <button className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary text-background-dark font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all relative z-10 flex items-center justify-center gap-2">
+                                    <span className="material-symbols-outlined">play_arrow</span>
+                                    Start Workout
+                                </button>
+                            </div>
+
+                            <div className="bg-surface rounded-3xl shadow-card p-8 flex flex-col">
+                                <div className="flex justify-between items-center mb-8">
+                                    <h3 className="text-xl font-bold text-text-main">Recent Workouts</h3>
+                                    <a className="text-sm font-bold text-primary hover:text-primary-dark transition-colors" href="#">View All</a>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <div className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle">
+                                        <div className="size-12 rounded-xl bg-orange-50 dark:bg-orange-900/10 text-orange-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
                                             <span className="material-symbols-outlined">directions_run</span>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="text-white text-base font-medium truncate">Morning Run</h4>
-                                            <p className="text-[#92c9a4] text-sm truncate">Cardio • 5.2 km</p>
+                                        <div className="flex-1">
+                                            <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">Morning Run</h4>
+                                            <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">Cardio • 5.2 km</p>
                                         </div>
-                                        <div className="text-right shrink-0">
-                                            <p className="text-white text-sm font-bold">45 min</p>
-                                            <p className="text-[#92c9a4] text-xs">Today</p>
+                                        <div className="text-right">
+                                            <p className="font-bold text-text-main">45 min</p>
+                                            <p className="text-xs text-text-secondary">Today</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
-                                        <div className="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
+                                    <div className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle">
+                                        <div className="size-12 rounded-xl bg-purple-50 dark:bg-purple-900/10 text-purple-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
                                             <span className="material-symbols-outlined">fitness_center</span>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="text-white text-base font-medium truncate">Upper Body Power</h4>
-                                            <p className="text-[#92c9a4] text-sm truncate">Strength • Chest & Back</p>
+                                        <div className="flex-1">
+                                            <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">Upper Body Power</h4>
+                                            <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">Strength • Chest</p>
                                         </div>
-                                        <div className="text-right shrink-0">
-                                            <p className="text-white text-sm font-bold">60 min</p>
-                                            <p className="text-[#92c9a4] text-xs">Yesterday</p>
+                                        <div className="text-right">
+                                            <p className="font-bold text-text-main">60 min</p>
+                                            <p className="text-xs text-text-secondary">Yesterday</p>
                                         </div>
-                                    </div>                                 <div className="flex items-center gap-4 p-4 hover:bg-[#23482f]/50 transition-colors border-b border-[#23482f]/50 last:border-0">
-                                        <div className="size-12 rounded-lg bg-[#23482f] flex items-center justify-center text-white shrink-0">
+                                    </div>
+                                    <div className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle">
+                                        <div className="size-12 rounded-xl bg-teal-50 dark:bg-teal-900/10 text-teal-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
                                             <span className="material-symbols-outlined">self_improvement</span>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <h4 className="text-white text-base font-medium truncate">Recovery Yoga</h4>
-                                            <p className="text-[#92c9a4] text-sm truncate">Mobility • Full Body</p>
+                                        <div className="flex-1">
+                                            <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">Yoga Flow</h4>
+                                            <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">Mobility</p>
                                         </div>
-                                        <div className="text-right shrink-0">
-                                            <p className="text-white text-sm font-bold">30 min</p>
-                                            <p className="text-[#92c9a4] text-xs">Oct 23</p>
+                                        <div className="text-right">
+                                            <p className="font-bold text-text-main">30 min</p>
+                                            <p className="text-xs text-text-secondary">Oct 23</p>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="lg:col-span-5 flex flex-col gap-6">
-                                <div className="bg-surface-dark rounded-xl p-6 border border-[#23482f] relative overflow-hidden group">
-                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                        <span className="material-symbols-outlined text-8xl text-white">calendar_month</span>
-                                    </div>
-                                    <h3 className="text-[#92c9a4] text-sm font-medium mb-1 uppercase tracking-wider">Up Next</h3>
-                                    <h4 className="text-white text-xl font-bold mb-4">Leg Day Hypertrophy</h4>
-                                    <div className="flex gap-4 mb-6">
-                                        <div className="flex items-center gap-2 text-sm text-white bg-[#23482f] px-3 py-1.5 rounded-full">
-                                            <span className="material-symbols-outlined text-sm text-primary">schedule</span>
-                                            5:30 PM
-                                        </div>
-                                        <div className="flex items-center gap-2 text-sm text-white bg-[#23482f] px-3 py-1.5 rounded-full">
-                                            <span className="material-symbols-outlined text-sm text-primary">timer</span>
-                                            75 min
-                                        </div>
-                                    </div>
-                                    <button className="w-full py-2 rounded-lg border border-primary text-primary hover:bg-primary hover:text-background-dark font-bold text-sm transition-colors">
-                                        View Details
-                                    </button>
-                                </div>
-                                <div className="flex-1 bg-linear-to-br from-primary/20 to-surface-dark rounded-xl p-6 border border-primary/20 flex flex-col justify-center items-center text-center relative overflow-hidden">
-                                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '16px 16px' }}></div>
-                                    <div className="relative z-10">
-                                        <div className="size-12 rounded-full bg-primary flex items-center justify-center text-background-dark mx-auto mb-4 shadow-[0_0_15px_rgba(19,236,91,0.5)]">
-                                            <span className="material-symbols-outlined">emoji_events</span>
-                                        </div>
-                                        <p className="text-white text-lg font-bold italic">"The only bad workout is the one that didn't happen."</p>
-                                        <p className="text-[#92c9a4] text-sm mt-2 font-medium">Keep crushing it, Alex!</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <footer className="mt-10 mb-6 text-center">
-                        <p className="text-[#92c9a4]/50 text-xs">© 2023 FitTrack. All rights reserved.</p>
-                    </footer>
                 </div>
             </main>
         </div>

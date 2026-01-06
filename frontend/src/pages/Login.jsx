@@ -98,7 +98,7 @@ const Login = () => {
                             </div>
                         </div>
                         {/* Login Button */}
-                        <button className="flex w-full justify-center rounded-lg bg-primary px-3 py-2.5 text-sm font-bold text-surface-dark shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:bg-[#0fd650] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)] transition-all transform active:scale-[0.98] mt-6" type="submit">
+                        <button className="flex w-full justify-center rounded-lg bg-primary px-3 py-2.5 text-sm font-bold text-surface-dark shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:bg-[#0fd650] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)] transition-all transform active:scale-[0.98] mt-6 text-black cursor-pointer" type="submit">
                             Log In
                         </button>
                     </form>

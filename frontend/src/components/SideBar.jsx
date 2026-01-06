@@ -9,7 +9,7 @@ const Sidebar = ({ handleLogout }) => {
                         <span className="material-symbols-outlined text-[24px]">fitness_center</span>
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-text-main text-xl font-bold tracking-tight">FitPlan</h1>
+                        <h1 className="text-text-main text-xl font-bold tracking-tight">RepStack</h1>
                     </div>
                 </div>
                 <div className="mb-8">

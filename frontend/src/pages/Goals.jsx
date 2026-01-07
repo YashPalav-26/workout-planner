@@ -90,19 +90,19 @@ const Goals = () => {
                                 <span className="material-symbols-outlined text-[22px]">grid_view</span>
                                 <span className="text-sm font-medium">Dashboard</span>
                             </Link>
-                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl bg-text-main text-background-dark font-semibold shadow-lg">
+                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl bg-primary text-background-dark font-semibold shadow-glow" href="#">
                                 <span className="material-symbols-outlined text-[22px]" data-weight="fill">flag</span>
                                 <span className="text-sm">Goals</span>
                             </a>
-                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group">
+                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group" href="#">
                                 <span className="material-symbols-outlined text-[22px]">calendar_month</span>
                                 <span className="text-sm font-medium">Schedule</span>
                             </a>
-                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group">
+                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group" href="#">
                                 <span className="material-symbols-outlined text-[22px]">fitness_center</span>
                                 <span className="text-sm font-medium">Workouts</span>
                             </a>
-                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group">
+                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group" href="#">
                                 <span className="material-symbols-outlined text-[22px]">monitoring</span>
                                 <span className="text-sm font-medium">Analytics</span>
                             </a>
@@ -111,11 +111,11 @@ const Goals = () => {
                     <div>
                         <p className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-4 pl-4 opacity-70">Account</p>
                         <nav className="flex flex-col gap-2">
-                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group">
+                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group" href="#">
                                 <span className="material-symbols-outlined text-[22px]">account_circle</span>
                                 <span className="text-sm font-medium">Profile</span>
                             </a>
-                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group">
+                            <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group" href="#">
                                 <span className="material-symbols-outlined text-[22px]">settings</span>
                                 <span className="text-sm font-medium">Settings</span>
                             </a>
@@ -150,7 +150,7 @@ const Goals = () => {
                             </div>
                         </div>
                     </div>
-                    <button onClick={() => setShowModal(true)} className="bg-text-main hover:bg-text-secondary text-background-dark font-bold py-2.5 px-4 sm:py-3 sm:px-6 md:py-3.5 md:px-7 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 text-sm sm:text-base">
+                    <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-primary-hover text-background-dark font-bold py-2.5 px-4 sm:py-3 sm:px-6 md:py-3.5 md:px-7 rounded-xl flex items-center justify-center gap-1 sm:gap-2 transition-all shadow-glow hover:-translate-y-1 text-sm sm:text-base">
                         <span className="material-symbols-outlined text-[20px]">add</span>
                         <span className="hidden sm:inline">Create Goal</span>
                         <span className="sm:hidden">Add</span>
@@ -160,7 +160,7 @@ const Goals = () => {
                 <div className="flex-1 overflow-y-auto px-8 pb-8 md:px-12 md:pb-12 no-scrollbar">
                     <div className="max-w-[1600px] mx-auto flex flex-col gap-6 sm:gap-8">
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-                            <div className="lg:col-span-8 p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface border border-border-subtle shadow-card relative overflow-hidden group">
+                            <div className="lg:col-span-7 p-6 sm:p-8 lg:p-8 rounded-2xl sm:rounded-3xl bg-surface border border-border-subtle shadow-card relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
                                     <span className="material-symbols-outlined text-[150px] sm:text-[200px] text-text-main">emoji_events</span>
                                 </div>
@@ -169,7 +169,7 @@ const Goals = () => {
                                         <div>
                                             <h3 className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-text-secondary mb-2 sm:mb-3">Overall Progress</h3>
                                             <div className="flex items-baseline gap-2 sm:gap-4">
-                                                <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-text-main tracking-tighter leading-none">{overallProgress}%</span>
+                                                <span className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-black text-text-main tracking-tighter leading-none">{overallProgress}%</span>
                                             </div>
                                         </div>
                                         <div className="flex flex-col sm:items-end gap-1">
@@ -196,12 +196,12 @@ const Goals = () => {
                                 </div>
                             </div>
 
-                            <div className="lg:col-span-4 flex flex-col gap-4 sm:gap-6">
-                                <div className="flex-1 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-text-main text-background-dark border border-text-main shadow-xl flex items-center justify-between group cursor-default transition-transform hover:-translate-y-1">
+                            <div className="lg:col-span-5 flex flex-col gap-4">
+                                <div className="flex-1 p-6 rounded-2xl sm:rounded-3xl bg-primary text-background-dark shadow-glow flex items-center justify-between group cursor-default">
                                     <div>
                                         <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest opacity-60 mb-2">Current Streak</p>
                                         <div className="flex items-baseline gap-2">
-                                            <p className="text-4xl sm:text-5xl font-black">12</p>
+                                            <p className="text-4xl sm:text-4xl font-black">12</p>
                                             <span className="text-xs sm:text-sm font-bold opacity-60">days</span>
                                         </div>
                                     </div>
@@ -209,11 +209,11 @@ const Goals = () => {
                                         <span className="material-symbols-outlined text-2xl sm:text-3xl">local_fire_department</span>
                                     </div>
                                 </div>
-                                <div className="flex-1 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-surface border border-border-subtle shadow-card flex items-center justify-between group hover:border-text-secondary transition-colors">
+                                <div className="flex-1 p-6 rounded-2xl sm:rounded-3xl bg-surface border border-border-subtle shadow-card flex items-center justify-between group hover:border-text-secondary transition-colors">
                                     <div>
                                         <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-text-secondary mb-2">Goals Met</p>
                                         <div className="flex items-baseline gap-2">
-                                            <p className="text-4xl sm:text-5xl font-black text-text-main">{completedGoals}</p>
+                                            <p className="text-4xl sm:text-4xl font-black text-text-main">{completedGoals}</p>
                                             <span className="text-xs sm:text-sm font-bold text-text-secondary">/ {totalGoals}</span>
                                         </div>
                                     </div>
@@ -232,8 +232,8 @@ const Goals = () => {
                                         onClick={() => setSelectedCategory(category)}
                                         className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all shadow-md whitespace-nowrap ${
                                             selectedCategory === category
-                                                ? 'bg-text-main text-background-dark'
-                                                : 'text-text-secondary hover:bg-surface-highlight transition-colors'
+                                                ? 'bg-primary text-background-dark'
+                                                : 'bg-surface hover:bg-surface-highlight text-text-secondary hover:text-text-main transition-colors'
                                         }`}
                                     >
                                         {category === 'All' ? 'All Goals' : category}
@@ -241,20 +241,15 @@ const Goals = () => {
                                 ))}
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
                                 {filteredGoals.map((goal) => (
-                                    <div key={goal.id} className={`group relative flex flex-col justify-between p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl ${
+                                    <div key={goal.id} className={`group relative flex flex-col p-5 rounded-2xl sm:rounded-3xl ${
                                         goal.completed
                                             ? 'bg-primary/10 border border-primary/20'
-                                            : 'bg-surface border border-border-subtle hover:border-text-secondary'
-                                    } transition-all cursor-pointer hover:shadow-xl hover:shadow-text-secondary/5 min-h-[260px] sm:min-h-[280px]`}>
+                                            : 'bg-surface border border-border-subtle hover:border-primary/50'
+                                    } transition-all cursor-pointer hover:shadow-xl hover:shadow-primary/10`}>
                                         <div className="flex justify-between items-start">
-                                            <div className={`size-12 sm:size-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${
-                                                goal.color === 'orange' ? 'bg-orange-500/10 text-orange-500' :
-                                                goal.color === 'indigo' ? 'bg-indigo-500/10 text-indigo-500' :
-                                                goal.color === 'emerald' ? 'bg-emerald-500/10 text-emerald-500' :
-                                                'bg-primary/20 text-background-dark'
-                                            }`}>
+                                            <div className="size-12 sm:size-14 rounded-xl sm:rounded-2xl flex items-center justify-center bg-primary/10 text-primary">
                                                 <span className="material-symbols-outlined text-[24px] sm:text-[28px]">{goal.icon}</span>
                                             </div>
                                             <div className="flex items-center gap-2">
@@ -271,12 +266,8 @@ const Goals = () => {
                                             </div>
                                         </div>
                                         <div className="mt-4 sm:mt-6">
-                                            <h3 className={`text-xl sm:text-2xl font-bold tracking-tight ${
+                                            <h3 className={`text-xl sm:text-2xl font-bold tracking-tight group-hover:text-primary ${
                                                 goal.completed ? 'text-primary line-through' : 'text-text-main'
-                                            } ${goal.color === 'orange' ? 'group-hover:text-orange-500' :
-                                                goal.color === 'indigo' ? 'group-hover:text-indigo-500' :
-                                                goal.color === 'emerald' ? 'group-hover:text-emerald-500' :
-                                                'group-hover:text-primary'
                                             } transition-colors`}>
                                                 {goal.text}
                                             </h3>
@@ -284,7 +275,7 @@ const Goals = () => {
                                                 {goal.category}
                                             </p>
                                         </div>
-                                        <div className="flex flex-col gap-3 sm:gap-4 mt-auto pt-4 sm:pt-6">
+                                        <div className="flex flex-col gap-3 sm:gap-4 mt-6 pt-6 border-t border-border-subtle">
                                             <div className="flex justify-between items-end">
                                                 <span className={`text-3xl sm:text-4xl font-bold tracking-tighter ${goal.completed ? 'text-primary' : 'text-text-main'}`}>
                                                     {goal.current}<span className="text-sm sm:text-base font-semibold text-text-secondary ml-1">{goal.unit}</span>
@@ -300,7 +291,7 @@ const Goals = () => {
                                     </div>
                                 ))}
 
-                                <div onClick={() => setShowModal(true)} className="group flex flex-col justify-center items-center p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border-2 border-dashed border-border-subtle hover:border-text-secondary hover:bg-surface-highlight/50 cursor-pointer transition-all min-h-[260px] sm:min-h-[280px]">
+                                <div onClick={() => setShowModal(true)} className="group flex flex-col justify-center items-center p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border-2 border-dashed border-border-subtle hover:border-text-secondary hover:bg-surface-highlight/50 cursor-pointer transition-all">
                                     <div className="size-14 sm:size-16 rounded-full bg-surface-highlight group-hover:bg-text-main group-hover:text-background-dark flex items-center justify-center text-text-secondary transition-colors mb-3 sm:mb-4 duration-300">
                                         <span className="material-symbols-outlined text-2xl sm:text-3xl">add</span>
                                     </div>
@@ -445,7 +436,7 @@ const Goals = () => {
                                         className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm sm:text-base"
                                     />
                                 </div>
-                                <button onClick={handleAddGoal} className="w-full bg-primary hover:bg-primary-hover text-background-dark font-bold py-3 sm:py-4 rounded-xl transition-all text-sm sm:text-base">
+                                <button onClick={handleAddGoal} className="w-full bg-primary cursor-pointer hover:bg-primary-hover text-background-dark font-bold py-3 sm:py-4 rounded-xl transition-all text-sm sm:text-base">
                                     Create Goal
                                 </button>
                             </div>

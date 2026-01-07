@@ -127,7 +127,7 @@ const Signup = () => {
                         </div>
 
                         {/* Submit Button */}
-                        <button className="mt-2 flex w-full cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-[#0fd650] transition-all text-surface-dark text-sm font-bold tracking-wide shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)]" type="submit">
+                        <button className="mt-2 flex w-full cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-[#0fd650] transition-all text-surface-dark text-sm font-bold tracking-wide shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)] text-black" type="submit">
                             Create Account
                         </button>
                     </form>

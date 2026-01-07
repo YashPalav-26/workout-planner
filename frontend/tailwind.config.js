@@ -8,24 +8,30 @@ export default {
     theme: {
         extend: {
             colors: {
-                "primary": "#13ec5b",
-                "background-light": "#f6f8f6",
-                "background-dark": "#102216",
-                "surface-dark": "#112217",
-                "input-bg": "#193322",
-                "input-border": "#326744",
-                "input-placeholder": "#92c9a4",
+                "primary": "#d9f99d", // Lime 200
+                "primary-hover": "#bef264", // Lime 300
+                "background-dark": "#0f0f0f", // Deep black
+                "surface": "#18181b", // Zinc 900
+                "surface-highlight": "#27272a", // Zinc 800
+                "border-subtle": "#27272a", // Zinc 800
+                "text-main": "#f4f4f5", // Zinc 100
+                "text-secondary": "#a1a1aa", // Zinc 400
+                "accent-blue": "#38bdf8",
             },
             fontFamily: {
-                "display": ["Lexend", "sans-serif"],
-                "body": ["Noto Sans", "sans-serif"]
+                "display": ["Manrope", "sans-serif"],
+                "body": ["Inter", "sans-serif"]
             },
             borderRadius: {
                 "DEFAULT": "0.25rem",
                 "lg": "0.5rem",
                 "xl": "0.75rem",
-                "full": "9999px"
+                "full": "9999px",
+                "3xl": "1.5rem"
             },
+            backgroundImage: {
+                'grid-white': "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)"
+            }
         },
     },
     plugins: [

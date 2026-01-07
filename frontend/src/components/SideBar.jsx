@@ -15,7 +15,7 @@ const Sidebar = ({ handleLogout }) => {
                 <div className="mb-8">
                     <p className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-4 pl-4 opacity-70">Menu</p>
                     <nav className="flex flex-col gap-2">
-                        <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl bg-text-main text-background-dark font-semibold shadow-lg" href="#">
+                        <a className="flex items-center gap-4 px-4 py-3.5 rounded-2xl bg-primary text-background-dark font-semibold shadow-glow" href="#">
                             <span className="material-symbols-outlined text-[22px]" data-weight="fill">grid_view</span>
                             <span className="text-sm">Dashboard</span>
                         </a>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
     return (
         <div className="relative flex min-h-screen w-full flex-col bg-background-dark text-text-main overflow-x-hidden font-body antialiased selection:bg-primary selection:text-background-dark">
-            <header className="fixed top-0 left-0 right-0 z-50 w-full px-6 py-6 mix-blend-difference text-white">
+            <header className="fixed top-0 left-0 right-0 z-50 w-full px-6 py-6 bg-background-dark/80 backdrop-blur-xl text-white border-b border-border-subtle">
                 <div className="max-w-[1440px] mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <span className="material-symbols-outlined text-[28px] text-primary">fitness_center</span>
@@ -42,9 +42,9 @@ const Home = () => {
                                 A minimalistic planner for the dedicated athlete. Strip away the noise and focus on raw progression.
                             </p>
                             <div className="flex items-center gap-4">
-                                <Link to="/signup" className="h-12 px-8 bg-white text-black rounded-full font-bold hover:bg-primary transition-colors duration-300">Start Trial</Link>
-                                <button className="size-12 rounded-full border border-border-subtle flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group-btn">
-                                    <span className="material-symbols-outlined group-btn-hover:scale-110">arrow_downward</span>
+                                <Link to="/signup" className="h-12 px-8 bg-white text-black rounded-full font-bold hover:bg-primary transition-colors duration-300 flex items-center justify-center">Start Trial</Link>
+                                <button className="size-12 rounded-full border border-border-subtle flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 group">
+                                    <span className="material-symbols-outlined group-hover:scale-110 transition-transform">arrow_downward</span>
                                 </button>
                             </div>
                         </div>
@@ -170,7 +170,7 @@ const Home = () => {
                                 <span className="material-symbols-outlined text-[16px] fill-current">star</span>
                                 <span className="material-symbols-outlined text-[16px] fill-current">star</span>
                             </div>
-                            <p className="text-lg text-white font-medium mb-6">"Finally, an app that isn't trying to be a social network. It's just me, the weights, and the data."</p>
+                            <blockquote className="text-lg text-white font-medium mb-6">"Finally, an app that isn't trying to be a social network. It's just me, the weights, and the data."</blockquote>
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("/imgs/img2.jpg")' }}></div>
                                 <div>
@@ -182,7 +182,7 @@ const Home = () => {
 
                         <div className="break-inside-avoid bg-primary text-background-dark p-8 rounded-3xl">
                             <span className="material-symbols-outlined text-4xl mb-4">format_quote</span>
-                            <p className="text-xl font-bold leading-tight mb-6">"I broke through a 3-month plateau on my squat thanks to the progressive overload tracking."</p>
+                            <blockquote className="text-xl font-bold leading-tight mb-6">"I broke through a 3-month plateau on my squat thanks to the progressive overload tracking."</blockquote>
                             <div className="flex items-center gap-3 border-t border-black/10 pt-4">
                                 <div className="w-10 h-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("/imgs/img1.png")' }}></div>
                                 <div>
@@ -193,7 +193,7 @@ const Home = () => {
                         </div>
 
                         <div className="break-inside-avoid bg-surface border border-border-subtle p-8 rounded-3xl">
-                            <p className="text-white mb-6">"The ability to copy previous weeks saves me so much planning time. It's streamlined my Sunday routine perfectly."</p>
+                            <blockquote className="text-white mb-6">"The ability to copy previous weeks saves me so much planning time. It's streamlined my Sunday routine perfectly."</blockquote>
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full bg-cover bg-center" style={{ backgroundImage: 'url("/imgs/img3.jpg")' }}></div>
                                 <div>
@@ -219,10 +219,10 @@ const Home = () => {
                                 Start your 14-day free trial today. Experience the difference of a distraction-free environment.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Link to="/signup" className="px-8 py-4 bg-white text-black text-lg font-bold rounded-full hover:bg-primary transition-colors duration-300">
+                                <Link to="/signup" className="px-8 py-4 bg-white text-black text-lg font-bold rounded-full hover:bg-primary transition-colors duration-300 flex items-center justify-center">
                                     Get Started Free
                                 </Link>
-                                <button className="px-8 py-4 bg-transparent border border-white/20 text-white text-lg font-medium rounded-full hover:bg-white/5 transition-colors">
+                                <button className="px-8 py-4 bg-transparent border border-white/20 text-white text-lg font-medium rounded-full hover:bg-white/5 transition-colors flex items-center justify-center">
                                     View Pricing
                                 </button>
                             </div>
@@ -254,7 +254,7 @@ const Home = () => {
                         <div className="md:col-span-2 md:col-start-7">
                             <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Product</h4>
                             <ul className="space-y-3 text-sm text-text-secondary">
-                                <li><a className="hover:text-primary transition-colors" href="#">Features</a></li>
+                                <li><a className="hover:text-primary transition-colors" href="#features">Features</a></li>
                                 <li><a className="hover:text-primary transition-colors" href="#">Integrations</a></li>
                                 <li><a className="hover:text-primary transition-colors" href="#">Pricing</a></li>
                             </ul>
@@ -263,7 +263,7 @@ const Home = () => {
                             <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Resources</h4>
                             <ul className="space-y-3 text-sm text-text-secondary">
                                 <li><a className="hover:text-primary transition-colors" href="#">Documentation</a></li>
-                                <li><a className="hover:text-primary transition-colors" href="#">Community</a></li>
+                                <li><a className="hover:text-primary transition-colors" href="#testimonials">Community</a></li>
                                 <li><a className="hover:text-primary transition-colors" href="#">Blog</a></li>
                             </ul>
                         </div>

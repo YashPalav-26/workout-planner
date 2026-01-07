@@ -77,12 +77,12 @@ const Signup = () => {
             </div>
 
             {/* Right Side: Sign Up Form */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 py-10 lg:px-16 bg-surface-dark relative">
+            <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 py-10 lg:px-16 bg-surface relative">
                 <div className="max-w-sm mx-auto w-full">
                     {/* Header */}
                     <div className="mb-6">
-                        <h2 className="text-2xl font-bold text-white mb-2">Create Account</h2>
-                        <p className="text-input-placeholder text-sm">Join us to start tracking your fitness progress today.</p>
+                        <h2 className="text-2xl font-bold text-text-main mb-2">Create Account</h2>
+                        <p className="text-text-secondary text-sm">Join us to start tracking your fitness progress today.</p>
                     </div>
 
 
@@ -92,50 +92,50 @@ const Signup = () => {
                         {/* Name Fields */}
                         <div className="flex gap-3">
                             <div className="flex-1 space-y-1">
-                                <label className="text-white text-xs font-medium ml-1">First Name</label>
-                                <input name="firstName" value={firstName} onChange={handleChange} className="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-input-border bg-input-bg focus:border-primary h-10 px-3 placeholder:text-input-placeholder/50 text-sm" placeholder="John" type="text" required />
+                                <label className="text-text-secondary text-xs font-medium ml-1">First Name</label>
+                                <input name="firstName" value={firstName} onChange={handleChange} className="form-input w-full rounded-lg text-text-main focus:outline-0 focus:ring-1 focus:ring-primary border border-border-subtle bg-surface-highlight focus:border-primary h-10 px-3 placeholder:text-text-secondary/50 text-sm" placeholder="John" type="text" required />
                             </div>
                             <div className="flex-1 space-y-1">
-                                <label className="text-white text-xs font-medium ml-1">Last Name</label>
-                                <input name="lastName" value={lastName} onChange={handleChange} className="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-input-border bg-input-bg focus:border-primary h-10 px-3 placeholder:text-input-placeholder/50 text-sm" placeholder="Doe" type="text" required />
+                                <label className="text-text-secondary text-xs font-medium ml-1">Last Name</label>
+                                <input name="lastName" value={lastName} onChange={handleChange} className="form-input w-full rounded-lg text-text-main focus:outline-0 focus:ring-1 focus:ring-primary border border-border-subtle bg-surface-highlight focus:border-primary h-10 px-3 placeholder:text-text-secondary/50 text-sm" placeholder="Doe" type="text" required />
                             </div>
                         </div>
                         {/* Email Field */}
                         <div className="space-y-1">
-                            <label className="text-white text-xs font-medium ml-1">Email Address</label>
+                            <label className="text-text-secondary text-xs font-medium ml-1">Email Address</label>
                             <div className="relative">
-                                <input name="email" value={email} onChange={handleChange} className="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-input-border bg-input-bg focus:border-primary h-10 pl-3 pr-9 placeholder:text-input-placeholder/50 text-sm" placeholder="john@example.com" type="email" required />
-                                <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-input-placeholder text-[18px] pointer-events-none">mail</span>
+                                <input name="email" value={email} onChange={handleChange} className="form-input w-full rounded-lg text-text-main focus:outline-0 focus:ring-1 focus:ring-primary border border-border-subtle bg-surface-highlight focus:border-primary h-10 pl-3 pr-9 placeholder:text-text-secondary/50 text-sm" placeholder="john@example.com" type="email" required />
+                                <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary text-[18px] pointer-events-none">mail</span>
                             </div>
                         </div>
                         {/* Password Field */}
                         <div className="space-y-1">
-                            <label className="text-white text-xs font-medium ml-1">Password</label>
+                            <label className="text-text-secondary text-xs font-medium ml-1">Password</label>
                             <div className="relative">
-                                <input name="password" value={password} onChange={handleChange} className="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border border-input-border bg-input-bg focus:border-primary h-10 pl-3 pr-9 placeholder:text-input-placeholder/50 text-sm" placeholder="Min. 8 chars" type={passwordVisible ? 'text' : 'password'} required />
-                                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-input-placeholder hover:text-white transition-colors flex items-center justify-center" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
+                                <input name="password" value={password} onChange={handleChange} className="form-input w-full rounded-lg text-text-main focus:outline-0 focus:ring-1 focus:ring-primary border border-border-subtle bg-surface-highlight focus:border-primary h-10 pl-3 pr-9 placeholder:text-text-secondary/50 text-sm" placeholder="Min. 8 chars" type={passwordVisible ? 'text' : 'password'} required />
+                                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-main transition-colors flex items-center justify-center" type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
                                     <span className="material-symbols-outlined text-[18px]">{passwordVisible ? 'visibility' : 'visibility_off'}</span>
                                 </button>
                             </div>
                             {/* Password Strength Indicator */}
                             <div className="flex gap-1 mt-2 h-1 w-full">
-                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 1 ? (passwordStrength === 1 ? 'bg-red-500' : passwordStrength === 2 ? 'bg-orange-500' : passwordStrength === 3 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-input-border'}`}></div>
-                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 2 ? (passwordStrength === 2 ? 'bg-orange-500' : passwordStrength === 3 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-input-border'}`}></div>
-                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 3 ? (passwordStrength === 3 ? 'bg-yellow-500' : 'bg-green-500') : 'bg-input-border'}`}></div>
-                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 4 ? 'bg-green-500' : 'bg-input-border'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 1 ? (passwordStrength === 1 ? 'bg-red-500' : passwordStrength === 2 ? 'bg-orange-500' : passwordStrength === 3 ? 'bg-yellow-500' : 'bg-primary') : 'bg-border-subtle'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 2 ? (passwordStrength === 2 ? 'bg-orange-500' : passwordStrength === 3 ? 'bg-yellow-500' : 'bg-primary') : 'bg-border-subtle'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 3 ? (passwordStrength === 3 ? 'bg-yellow-500' : 'bg-primary') : 'bg-border-subtle'}`}></div>
+                                <div className={`h-full w-1/4 rounded-full ${passwordStrength >= 4 ? 'bg-primary' : 'bg-border-subtle'}`}></div>
                             </div>
                         </div>
 
                         {/* Submit Button */}
-                        <button className="mt-2 flex w-full cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-[#0fd650] transition-all text-surface-dark text-sm font-bold tracking-wide shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)] text-black" type="submit">
+                        <button className="mt-2 flex w-full cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary hover:bg-primary-hover transition-all text-background-dark text-sm font-bold tracking-wide shadow-glow transform active:scale-[0.98]" type="submit">
                             Create Account
                         </button>
                     </form>
                     {/* Footer */}
                     <div className="mt-6 text-center">
-                        <p className="text-xs text-input-placeholder">
+                        <p className="text-xs text-text-secondary">
                             Already have an account?
-                            <Link className="text-white font-bold hover:text-primary transition-colors ml-1" to="/login">Log In</Link>
+                            <Link className="text-text-main font-bold hover:text-primary transition-colors ml-1" to="/login">Log In</Link>
                         </p>
                     </div>
                 </div>

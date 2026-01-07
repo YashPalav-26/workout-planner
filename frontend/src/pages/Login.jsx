@@ -60,52 +60,52 @@ const Login = () => {
                 </div>
             </div>
             {/* Right Side: Login Form */}
-            <div className="flex w-full flex-col justify-center px-6 py-10 sm:px-12 lg:w-1/2 xl:px-16 bg-surface-dark">
+            <div className="flex w-full flex-col justify-center px-6 py-10 sm:px-12 lg:w-1/2 xl:px-16 bg-surface">
                 <div className="mx-auto w-full max-w-sm">
                     {/* Titles */}
                     <div className="mb-6">
-                        <h1 className="text-2xl font-bold text-white">Welcome Back</h1>
-                        <p className="mt-2 text-sm text-gray-400">Log in to track your weekly progress and crush your goals.</p>
+                        <h1 className="text-2xl font-bold text-text-main">Welcome Back</h1>
+                        <p className="mt-2 text-sm text-text-secondary">Log in to track your weekly progress and crush your goals.</p>
                     </div>
                     {/* Form */}
                     <form className="space-y-6" onSubmit={onSubmit}>
                         {/* Email Field */}
                         <div className="space-y-2">
-                            <label className="block text-xs font-medium text-gray-200 ml-1" htmlFor="email">
+                            <label className="block text-xs font-medium text-text-secondary ml-1" htmlFor="email">
                                 Email address
                             </label>
                             <div className="relative">
-                                <input autoComplete="email" className="block w-full rounded-lg border border-input-border bg-input-bg text-white placeholder:text-input-placeholder/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-0 sm:text-sm h-11 px-3 transition-colors" id="email" name="email" placeholder="user@example.com" required type="email" value={email} onChange={handleChange} />
+                                <input autoComplete="email" className="block w-full rounded-lg border border-border-subtle bg-surface-highlight text-text-main placeholder:text-text-secondary/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-0 sm:text-sm h-11 px-3 transition-colors" id="email" name="email" placeholder="user@example.com" required type="email" value={email} onChange={handleChange} />
                             </div>
                         </div>
                         {/* Password Field */}
                         <div className="space-y-2">
                             <div className="flex items-center justify-between ml-1">
-                                <label className="block text-xs font-medium text-gray-200" htmlFor="password">
+                                <label className="block text-xs font-medium text-text-secondary" htmlFor="password">
                                     Password
                                 </label>
                                 <div className="text-xs">
-                                    <a className="font-medium text-primary hover:text-primary/80 transition-colors" href="#">
+                                    <a className="font-medium text-primary hover:text-primary-hover transition-colors" href="#">
                                         Forgot password?
                                     </a>
                                 </div>
                             </div>
                             <div className="relative flex items-center">
-                                <input autoComplete="current-password" className="block w-full rounded-lg border border-input-border bg-input-bg text-white placeholder:text-input-placeholder/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-0 sm:text-sm h-11 px-3 pr-10 transition-colors" id="password" name="password" placeholder="••••••••••" required type={showPassword ? "text" : "password"} value={password} onChange={handleChange} />
+                                <input autoComplete="current-password" className="block w-full rounded-lg border border-border-subtle bg-surface-highlight text-text-main placeholder:text-text-secondary/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-0 sm:text-sm h-11 px-3 pr-10 transition-colors" id="password" name="password" placeholder="••••••••••" required type={showPassword ? "text" : "password"} value={password} onChange={handleChange} />
                                 <div className="absolute right-0 flex h-full items-center pr-3">
-                                    <span className="material-symbols-outlined cursor-pointer text-input-placeholder hover:text-white transition-colors select-none" style={{ fontSize: '18px' }} onClick={() => setShowPassword(!showPassword)}>{showPassword ? 'visibility' : 'visibility_off'}</span>
+                                    <span className="material-symbols-outlined cursor-pointer text-text-secondary hover:text-text-main transition-colors select-none" style={{ fontSize: '18px' }} onClick={() => setShowPassword(!showPassword)}>{showPassword ? 'visibility' : 'visibility_off'}</span>
                                 </div>
                             </div>
                         </div>
                         {/* Login Button */}
-                        <button className="flex w-full justify-center rounded-lg bg-primary px-3 py-2.5 text-sm font-bold text-surface-dark shadow-[0_0_20px_rgba(19,236,91,0.2)] hover:bg-[#0fd650] hover:shadow-[0_0_30px_rgba(19,236,91,0.4)] transition-all transform active:scale-[0.98] mt-6 text-black cursor-pointer" type="submit">
+                        <button className="flex w-full justify-center rounded-lg bg-primary px-3 py-2.5 text-sm font-bold text-background-dark shadow-glow hover:bg-primary-hover transition-all transform active:scale-[0.98] mt-6 cursor-pointer" type="submit">
                             Log In
                         </button>
                     </form>
                     {/* Footer Sign Up */}
-                    <p className="mt-6 text-center text-xs text-gray-400">
+                    <p className="mt-6 text-center text-xs text-text-secondary">
                         Don't have an account?
-                        <Link className="font-bold text-white hover:text-primary transition-colors ml-1" to="/signup">Sign up free</Link>
+                        <Link className="font-bold text-text-main hover:text-primary transition-colors ml-1" to="/signup">Sign up free</Link>
                     </p>
                 </div>
             </div>

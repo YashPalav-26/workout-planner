@@ -3,6 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import authRoutes from './routes/auth.js';
+import goalsRoutes from './routes/goals.js';
+import workoutsRoutes from './routes/workouts.js';
+import metricsRoutes from './routes/metrics.js';
 
 dotenv.config();
 
@@ -22,6 +25,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/goals', goalsRoutes);
+app.use('/api/workouts', workoutsRoutes);
+app.use('/api/metrics', metricsRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

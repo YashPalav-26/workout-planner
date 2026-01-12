@@ -2,10 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
-import authRoutes from './routes/auth.js';
-import goalsRoutes from './routes/goals.js';
-import workoutsRoutes from './routes/workouts.js';
-import metricsRoutes from './routes/metrics.js';
+import authRoutes from './routes/auth.routes.js';
+import goalsRoutes from './routes/goals.routes.js';
+import workoutsRoutes from './routes/workouts.routes.js';
+import metricsRoutes from './routes/metrics.routes.js';
 
 dotenv.config();
 

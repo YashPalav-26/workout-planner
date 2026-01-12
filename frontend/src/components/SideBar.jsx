@@ -1,4 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
+import LogoSvg from "./LogoSvg";
+import {
+  Grid,
+  Calendar,
+  Flag,
+  Dumbbell,
+  BarChart2,
+  LayoutDashboard,
+} from "lucide-react";
 
 const Sidebar = ({ handleLogout }) => {
   const location = useLocation();
@@ -6,13 +15,11 @@ const Sidebar = ({ handleLogout }) => {
     <aside className="hidden md:flex flex-col w-72 h-full border-r border-border-subtle bg-surface overflow-y-auto z-30">
       <div className="p-8">
         <div className="flex items-center gap-3 mb-12">
-          <div className="bg-primary text-background-dark rounded-xl size-10 flex items-center justify-center shadow-glow">
-            <span className="material-symbols-outlined text-[24px]">
-              fitness_center
-            </span>
+          <div className="bg-primary text-black rounded-xl size-10 flex items-center justify-center shadow-glow">
+            <LogoSvg width="48" height="34" />
           </div>
           <div className="flex flex-col">
-            <h1 className="text-text-main text-xl font-bold tracking-tight">
+            <h1 className="text-text-main text-xl font-bold tracking-tight leading-none">
               RepStack
             </h1>
           </div>
@@ -30,12 +37,7 @@ const Sidebar = ({ handleLogout }) => {
                   : "text-text-secondary hover:bg-surface-highlight hover:text-text-main"
               }`}
             >
-              <span
-                className="material-symbols-outlined text-[22px]"
-                data-weight={location.pathname === "/dashboard" ? "fill" : ""}
-              >
-                grid_view
-              </span>
+              <LayoutDashboard size={22} />
               <span className="text-sm font-medium">Dashboard</span>
             </Link>
             <Link
@@ -46,12 +48,7 @@ const Sidebar = ({ handleLogout }) => {
                   : "text-text-secondary hover:bg-surface-highlight hover:text-text-main"
               }`}
             >
-              <span
-                className="material-symbols-outlined text-[22px]"
-                data-weight={location.pathname === "/schedule" ? "fill" : ""}
-              >
-                calendar_month
-              </span>
+              <Calendar size={22} />
               <span className="text-sm font-medium">Schedule</span>
             </Link>
             <Link
@@ -62,30 +59,21 @@ const Sidebar = ({ handleLogout }) => {
                   : "text-text-secondary hover:bg-surface-highlight hover:text-text-main"
               }`}
             >
-              <span
-                className="material-symbols-outlined text-[22px]"
-                data-weight={location.pathname === "/goals" ? "fill" : ""}
-              >
-                flag
-              </span>
+              <Flag size={22} />
               <span className="text-sm font-medium">Goals</span>
             </Link>
             <a
               className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group"
               href="#"
             >
-              <span className="material-symbols-outlined text-[22px]">
-                fitness_center
-              </span>
+              <Dumbbell size={22} />
               <span className="text-sm font-medium">Workouts</span>
             </a>
             <a
               className="flex items-center gap-4 px-4 py-3.5 rounded-2xl text-text-secondary hover:bg-surface-highlight hover:text-text-main transition-all group"
               href="#"
             >
-              <span className="material-symbols-outlined text-[22px]">
-                monitoring
-              </span>
+              <BarChart2 size={22} />
               <span className="text-sm font-medium">Analytics</span>
             </a>
           </nav>

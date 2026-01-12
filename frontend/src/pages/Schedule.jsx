@@ -42,15 +42,13 @@ const Schedule = () => {
         const workouts = await getWorkoutsByMonth(month, year);
         setAllWorkouts(workouts);
 
-        // Get today's workouts
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const todayStr = today.toISOString().split("T")[0];
+        const now = new Date();
+        const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
         const todayWork = workouts.filter((w) => {
           const wDate = new Date(w.scheduledDate);
-          wDate.setHours(0, 0, 0, 0);
-          return wDate.toISOString().split("T")[0] === todayStr;
+          const wDateStr = `${wDate.getFullYear()}-${String(wDate.getMonth() + 1).padStart(2, '0')}-${String(wDate.getDate()).padStart(2, '0')}`;
+          return wDateStr === todayStr;
         });
 
         setTodayWorkouts(todayWork);
@@ -72,8 +70,8 @@ const Schedule = () => {
     }
 
     try {
-      const selectedDate = new Date(currentDate);
-      selectedDate.setHours(0, 0, 0, 0);
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
       const newWorkout = await createWorkout({
         name: workoutForm.name,
@@ -81,7 +79,7 @@ const Schedule = () => {
         duration: parseInt(workoutForm.duration),
         startTime: workoutForm.startTime,
         description: workoutForm.description,
-        scheduledDate: selectedDate.toISOString(),
+        scheduledDate: dateStr,
       });
 
       setAllWorkouts([...allWorkouts, newWorkout]);
@@ -125,13 +123,14 @@ const Schedule = () => {
     // Current month days
     for (let i = 1; i <= lastDay.getDate(); i++) {
       const date = new Date(year, month, i);
-      const dateStr = date.toISOString().split("T")[0];
-      const todayStr = new Date().toISOString().split("T")[0];
+      const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+      const now = new Date();
+      const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
       const workouts = allWorkouts.filter((w) => {
         const wDate = new Date(w.scheduledDate);
-        wDate.setHours(0, 0, 0, 0);
-        return wDate.toISOString().split("T")[0] === dateStr;
+        const wDateStr = `${wDate.getFullYear()}-${String(wDate.getMonth() + 1).padStart(2, '0')}-${String(wDate.getDate()).padStart(2, '0')}`;
+        return wDateStr === dateStr;
       });
 
       days.push({

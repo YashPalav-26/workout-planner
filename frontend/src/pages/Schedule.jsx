@@ -1,111 +1,176 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SideBar.jsx";
+import {
+  getWorkoutsByMonth,
+  getWorkoutsByDate,
+  createWorkout,
+} from "../api/workoutService.js";
 
 const Schedule = () => {
   const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
-  const calendarDays = [
-    { day: 28, isCurrentMonth: false },
-    { day: 29, isCurrentMonth: false },
-    { day: 30, isCurrentMonth: false },
-    { day: 1, isCurrentMonth: true, event: null },
-    {
-      day: 2,
-      isCurrentMonth: true,
-      event: { name: "Cardio", color: "primary" },
-    },
-    { day: 3, isCurrentMonth: true, event: null },
-    {
-      day: 4,
-      isCurrentMonth: true,
-      event: { name: "Full Body", color: "primary" },
-    },
-    { day: 5, isCurrentMonth: true, event: null },
-    { day: 6, isCurrentMonth: true, event: { name: "Yoga", color: "primary" } },
-    { day: 7, isCurrentMonth: true, event: null },
-    { day: 8, isCurrentMonth: true, event: null },
-    {
-      day: 9,
-      isCurrentMonth: true,
-      event: { name: "Leg Day", color: "primary" },
-    },
-    { day: 10, isCurrentMonth: true, event: null },
-    {
-      day: 11,
-      isCurrentMonth: true,
-      event: { name: "Upper Body", color: "primary" },
-    },
-    { day: 12, isCurrentMonth: true, event: null },
-    {
-      day: 13,
-      isCurrentMonth: true,
-      event: { name: "Pilates", color: "primary" },
-    },
-    { day: 14, isCurrentMonth: true, event: null },
-    { day: 15, isCurrentMonth: true, event: null },
-    {
-      day: 16,
-      isCurrentMonth: true,
-      event: { name: "Running", color: "primary" },
-    },
-    { day: 17, isCurrentMonth: true, event: null },
-    {
-      day: 18,
-      isCurrentMonth: true,
-      event: { name: "Back & Biceps", color: "primary" },
-    },
-    { day: 19, isCurrentMonth: true, event: null },
-    {
-      day: 20,
-      isCurrentMonth: true,
-      event: { name: "HIIT (Missed)", color: "red-500", missed: true },
-    },
-    { day: 21, isCurrentMonth: true, event: null },
-    { day: 22, isCurrentMonth: true, event: null },
-    {
-      day: 23,
-      isCurrentMonth: true,
-      event: { name: "Yoga Flow", color: "primary" },
-    },
-    {
-      day: 24,
-      isCurrentMonth: true,
-      event: { name: "Upper Body", color: "primary" },
-    },
-    {
-      day: 25,
-      isCurrentMonth: true,
-      isToday: true,
-      events: [
-        { name: "Morning Run", completed: true },
-        { name: "Leg Hyper...", upNext: true },
-      ],
-    },
-    {
-      day: 26,
-      isCurrentMonth: true,
-      event: { name: "Recovery", color: "accent-blue" },
-    },
-    { day: 27, isCurrentMonth: true, event: null },
-    { day: 28, isCurrentMonth: true, event: null },
-    {
-      day: 29,
-      isCurrentMonth: true,
-      event: { name: "Cardio & Core", color: "accent-blue" },
-    },
-    { day: 30, isCurrentMonth: true, event: null },
-    {
-      day: 31,
-      isCurrentMonth: true,
-      event: { name: "Chest Day", color: "accent-blue" },
-    },
-  ];
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [allWorkouts, setAllWorkouts] = useState([]);
+  const [todayWorkouts, setTodayWorkouts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  // Form state
+  const [workoutForm, setWorkoutForm] = useState({
+    name: "",
+    type: "Cardio",
+    duration: 30,
+    startTime: "07:00",
+    description: "",
+  });
+
+  useEffect(() => {
+    const fetchScheduleData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const month = currentDate.getMonth() + 1;
+        const year = currentDate.getFullYear();
+
+        const workouts = await getWorkoutsByMonth(month, year);
+        setAllWorkouts(workouts);
+
+        // Get today's workouts
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const todayStr = today.toISOString().split("T")[0];
+
+        const todayWork = workouts.filter((w) => {
+          const wDate = new Date(w.scheduledDate);
+          wDate.setHours(0, 0, 0, 0);
+          return wDate.toISOString().split("T")[0] === todayStr;
+        });
+
+        setTodayWorkouts(todayWork);
+      } catch (err) {
+        setError(err.message);
+        console.error("Error fetching workouts:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchScheduleData();
+  }, [currentDate]);
+
+  const handleAddWorkout = async () => {
+    if (!workoutForm.name.trim()) {
+      alert("Please enter a workout name");
+      return;
+    }
+
+    try {
+      const selectedDate = new Date(currentDate);
+      selectedDate.setHours(0, 0, 0, 0);
+
+      const newWorkout = await createWorkout({
+        name: workoutForm.name,
+        type: workoutForm.type,
+        duration: parseInt(workoutForm.duration),
+        startTime: workoutForm.startTime,
+        description: workoutForm.description,
+        scheduledDate: selectedDate.toISOString(),
+      });
+
+      setAllWorkouts([...allWorkouts, newWorkout]);
+      setWorkoutForm({
+        name: "",
+        type: "Cardio",
+        duration: 30,
+        startTime: "07:00",
+        description: "",
+      });
+      setShowAddModal(false);
+    } catch (err) {
+      alert("Error creating workout: " + err.message);
+    }
+  };
+
+  // Get calendar days
+  const getCalendarDays = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const prevLastDay = new Date(year, month, 0);
+
+    const firstDayIndex = firstDay.getDay();
+    const lastDayIndex = lastDay.getDay();
+    const prevDays = firstDayIndex;
+    const nextDays = 6 - lastDayIndex;
+
+    const days = [];
+
+    // Previous month days
+    for (let i = prevDays; i > 0; i--) {
+      days.push({
+        day: prevLastDay.getDate() - i + 1,
+        isCurrentMonth: false,
+      });
+    }
+
+    // Current month days
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+      const date = new Date(year, month, i);
+      const dateStr = date.toISOString().split("T")[0];
+      const todayStr = new Date().toISOString().split("T")[0];
+
+      const workouts = allWorkouts.filter((w) => {
+        const wDate = new Date(w.scheduledDate);
+        wDate.setHours(0, 0, 0, 0);
+        return wDate.toISOString().split("T")[0] === dateStr;
+      });
+
+      days.push({
+        day: i,
+        isCurrentMonth: true,
+        isToday: dateStr === todayStr,
+        workouts: workouts,
+      });
+    }
+
+    // Next month days
+    for (let i = 1; i <= nextDays; i++) {
+      days.push({
+        day: i,
+        isCurrentMonth: false,
+      });
+    }
+
+    return days;
+  };
+
+  const calendarDays = getCalendarDays();
+
+  const handlePrevMonth = () => {
+    const newDate = new Date(currentDate);
+    newDate.setMonth(newDate.getMonth() - 1);
+    setCurrentDate(newDate);
+  };
+
+  const handleNextMonth = () => {
+    const newDate = new Date(currentDate);
+    newDate.setMonth(newDate.getMonth() + 1);
+    setCurrentDate(newDate);
+  };
+
+  const monthName = currentDate.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <div className="bg-background-dark text-text-main h-screen overflow-hidden transition-colors duration-300 antialiased flex">
@@ -157,15 +222,21 @@ const Schedule = () => {
                 <div className="flex items-center justify-between p-6 md:p-8 border-b border-border-subtle bg-surface/50">
                   <div className="flex items-center gap-6">
                     <h3 className="text-2xl font-extrabold text-text-main">
-                      October 2024
+                      {monthName}
                     </h3>
                     <div className="flex items-center gap-1">
-                      <button className="size-8 flex items-center justify-center rounded-full hover:bg-surface-highlight transition-colors text-text-secondary hover:text-text-main">
+                      <button
+                        onClick={handlePrevMonth}
+                        className="size-8 flex items-center justify-center rounded-full hover:bg-surface-highlight transition-colors text-text-secondary hover:text-text-main"
+                      >
                         <span className="material-symbols-outlined text-[20px]">
                           chevron_left
                         </span>
                       </button>
-                      <button className="size-8 flex items-center justify-center rounded-full hover:bg-surface-highlight transition-colors text-text-secondary hover:text-text-main">
+                      <button
+                        onClick={handleNextMonth}
+                        className="size-8 flex items-center justify-center rounded-full hover:bg-surface-highlight transition-colors text-text-secondary hover:text-text-main"
+                      >
                         <span className="material-symbols-outlined text-[20px]">
                           chevron_right
                         </span>
@@ -214,62 +285,24 @@ const Schedule = () => {
                       >
                         {day.day}
                       </span>
-                      {day.event && (
-                        <div
-                          className={`px-2 py-1 rounded-md bg-${
-                            day.event.color === "primary"
-                              ? "accent-success"
-                              : day.event.color === "accent-blue"
-                              ? "accent-blue"
-                              : day.event.color === "red-500"
-                              ? "accent-error"
-                              : day.event.color
-                          }/10 text-${
-                            day.event.color === "primary"
-                              ? "accent-success"
-                              : day.event.color === "accent-blue"
-                              ? "accent-blue"
-                              : day.event.color === "red-500"
-                              ? "accent-error"
-                              : day.event.color
-                          } text-[10px] font-bold truncate flex items-center gap-1 ${
-                            day.event.missed && "opacity-70"
-                          }`}
-                        >
-                          <span
-                            className={`size-1.5 rounded-full bg-${
-                              day.event.color === "primary"
-                                ? "accent-success"
-                                : day.event.color === "accent-blue"
-                                ? "accent-blue"
-                                : day.event.color === "red-500"
-                                ? "accent-error"
-                                : day.event.color
-                            } hidden md:block`}
-                          ></span>
-                          {day.event.name}
-                        </div>
+                      {day.workouts && day.workouts.length > 0 && (
+                        <>
+                          {day.workouts.slice(0, 2).map((w, idx) => (
+                            <div
+                              key={idx}
+                              className="px-2 py-1 rounded-md bg-accent-success/10 text-accent-success text-[10px] font-bold truncate flex items-center gap-1"
+                            >
+                              <span className="size-1.5 rounded-full bg-accent-success hidden md:block"></span>
+                              {w.name}
+                            </div>
+                          ))}
+                          {day.workouts.length > 2 && (
+                            <div className="px-2 py-1 text-[10px] font-bold text-text-secondary">
+                              +{day.workouts.length - 2} more
+                            </div>
+                          )}
+                        </>
                       )}
-                      {day.events &&
-                        day.events.map((e, i) => (
-                          <div
-                            key={i}
-                            className={`px-2 py-1 rounded-md text-[10px] font-bold truncate flex items-center gap-1 ${
-                              e.completed
-                                ? "bg-accent-success/10 text-accent-success"
-                                : e.upNext
-                                ? "bg-accent-blue/10 text-accent-blue border-l-2 border-accent-blue"
-                                : ""
-                            }`}
-                          >
-                            {e.completed && (
-                              <span className="material-symbols-outlined text-[10px]">
-                                check
-                              </span>
-                            )}
-                            {e.name}
-                          </div>
-                        ))}
                     </div>
                   ))}
                 </div>
@@ -283,84 +316,91 @@ const Schedule = () => {
                       Today's Plan
                     </span>
                     <h3 className="text-3xl font-extrabold text-text-main tracking-tight">
-                      Wed, Oct 25
+                      {new Date().toLocaleDateString("en-US", {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                      })}
                     </h3>
                   </div>
-                  <button className="size-10 rounded-xl bg-surface-highlight flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all group shadow-sm border border-transparent hover:border-primary/20">
+                  <button
+                    onClick={() => setShowAddModal(true)}
+                    className="size-10 rounded-xl bg-surface-highlight flex items-center justify-center hover:bg-primary hover:text-background-dark transition-all group shadow-sm border border-transparent hover:border-primary/20"
+                  >
                     <span className="material-symbols-outlined text-[24px]">
                       add
                     </span>
                   </button>
                 </div>
                 <div className="flex flex-col relative z-10">
-                  <div className="flex gap-4 items-start group">
-                    <div className="flex flex-col items-center gap-1 pt-1.5 h-full">
-                      <div className="size-5 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
-                        <span className="material-symbols-outlined text-background-dark text-[14px] font-bold">
-                          check
-                        </span>
+                  {todayWorkouts.length > 0 ? (
+                    todayWorkouts.map((workout, idx) => (
+                      <div
+                        key={workout._id}
+                        className="flex gap-4 items-start group"
+                      >
+                        <div className="flex flex-col items-center gap-1 pt-1.5 h-full">
+                          {workout.status === "completed" ? (
+                            <div className="size-5 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30">
+                              <span className="material-symbols-outlined text-background-dark text-[14px] font-bold">
+                                check
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="size-5 rounded-full border-[3px] border-accent-blue bg-surface shadow-[0_0_15px_rgba(56,189,248,0.5)]"></div>
+                          )}
+                          {idx < todayWorkouts.length - 1 && (
+                            <div className="w-0.5 flex-1 bg-border-subtle min-h-[40px]"></div>
+                          )}
+                        </div>
+                        <div className="flex-1 pb-8">
+                          <div className="flex justify-between items-start mb-1">
+                            <h4
+                              className={`font-bold text-lg ${
+                                workout.status === "completed"
+                                  ? "text-primary line-through"
+                                  : "text-text-main"
+                              }`}
+                            >
+                              {workout.name}
+                            </h4>
+                            <span
+                              className={`text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide ${
+                                workout.status === "completed"
+                                  ? "bg-primary/10 text-primary"
+                                  : "bg-accent-blue/10 text-accent-blue"
+                              }`}
+                            >
+                              {workout.status === "completed"
+                                ? "Completed"
+                                : "Up Next"}
+                            </span>
+                          </div>
+                          <p className="text-sm text-text-secondary font-medium mb-4">
+                            {workout.startTime} • {workout.duration} min •{" "}
+                            {workout.type}
+                          </p>
+                          {workout.status !== "completed" && (
+                            <div className="flex gap-3">
+                              <button className="px-5 py-2.5 rounded-xl bg-primary text-background-dark text-sm font-bold hover:bg-primary-hover hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                                <span className="material-symbols-outlined text-[18px]">
+                                  play_arrow
+                                </span>{" "}
+                                Start
+                              </button>
+                              <button className="px-5 py-2.5 rounded-xl border border-border-subtle text-text-secondary hover:text-text-main hover:bg-surface-highlight text-sm font-bold transition-all">
+                                Details
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className="w-0.5 flex-1 bg-border-subtle min-h-[40px]"></div>
-                    </div>
-                    <div className="flex-1 pb-8">
-                      <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-bold text-text-secondary line-through decoration-2 decoration-border-subtle/20 text-lg">
-                          Morning Run
-                        </h4>
-                        <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded-md uppercase tracking-wide">
-                          Completed
-                        </span>
-                      </div>
-                      <p className="text-sm text-text-secondary font-medium">
-                        07:00 AM • 45 min • Cardio
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start group">
-                    <div className="flex flex-col items-center gap-1 pt-1.5 h-full">
-                      <div className="size-5 rounded-full border-[3px] border-accent-blue bg-surface shadow-[0_0_15px_rgba(56,189,248,0.5)]"></div>
-                      <div className="w-0.5 flex-1 bg-border-subtle min-h-[40px]"></div>
-                    </div>
-                    <div className="flex-1 pb-8">
-                      <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-bold text-text-main text-lg">
-                          Leg Day Hypertrophy
-                        </h4>
-                        <span className="text-[10px] font-bold text-accent-blue bg-accent-blue/10 px-2 py-1 rounded-md uppercase tracking-wide">
-                          Up Next
-                        </span>
-                      </div>
-                      <p className="text-sm text-text-secondary font-medium mb-4">
-                        05:30 PM • 75 min • Strength
-                      </p>
-                      <div className="flex gap-3">
-                        <button className="px-5 py-2.5 rounded-xl bg-primary text-background-dark text-sm font-bold hover:bg-primary-hover hover:-translate-y-0.5 transition-all flex items-center gap-2">
-                          <span className="material-symbols-outlined text-[18px]">
-                            play_arrow
-                          </span>{" "}
-                          Start
-                        </button>
-                        <button className="px-5 py-2.5 rounded-xl border border-border-subtle text-text-secondary hover:text-text-main hover:bg-surface-highlight text-sm font-bold transition-all">
-                          Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start group">
-                    <div className="flex flex-col items-center gap-1 pt-1.5 h-full">
-                      <div className="size-5 rounded-full border-2 border-border-subtle bg-surface-highlight"></div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-bold text-text-secondary group-hover:text-text-main transition-colors text-lg">
-                          Mobility Session
-                        </h4>
-                      </div>
-                      <p className="text-sm text-text-secondary font-medium">
-                        08:00 PM • 20 min • Recovery
-                      </p>
-                    </div>
-                  </div>
+                    ))
+                  ) : (
+                    <p className="text-text-secondary text-center py-8">
+                      No workouts scheduled for today
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="bg-surface rounded-3xl shadow-card p-6 md:p-8 flex flex-col">
@@ -434,6 +474,121 @@ const Schedule = () => {
             </div>
           </div>
         </div>
+
+        {showAddModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-surface border border-border-subtle rounded-2xl sm:rounded-3xl p-6 sm:p-8 max-w-md w-full mx-2 sm:mx-4 shadow-2xl animate-in fade-in zoom-in duration-200">
+              <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-text-main">
+                  Schedule Workout
+                </h3>
+                <button
+                  onClick={() => setShowAddModal(false)}
+                  className="p-1 text-text-secondary hover:text-text-main transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[24px]">
+                    close
+                  </span>
+                </button>
+              </div>
+              <div className="space-y-3 sm:space-y-4">
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                    Workout Name
+                  </label>
+                  <input
+                    type="text"
+                    value={workoutForm.name}
+                    onChange={(e) =>
+                      setWorkoutForm({ ...workoutForm, name: e.target.value })
+                    }
+                    placeholder="e.g., Morning Run"
+                    className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm sm:text-base"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                    Type
+                  </label>
+                  <select
+                    value={workoutForm.type}
+                    onChange={(e) =>
+                      setWorkoutForm({ ...workoutForm, type: e.target.value })
+                    }
+                    className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm sm:text-base"
+                  >
+                    <option>Cardio</option>
+                    <option>Strength</option>
+                    <option>Flexibility</option>
+                    <option>Sports</option>
+                    <option>Recovery</option>
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                      Start Time
+                    </label>
+                    <input
+                      type="time"
+                      value={workoutForm.startTime}
+                      onChange={(e) =>
+                        setWorkoutForm({
+                          ...workoutForm,
+                          startTime: e.target.value,
+                        })
+                      }
+                      className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                      Duration (min)
+                    </label>
+                    <input
+                      type="number"
+                      value={workoutForm.duration}
+                      onChange={(e) =>
+                        setWorkoutForm({
+                          ...workoutForm,
+                          duration: e.target.value,
+                        })
+                      }
+                      className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                    Description (Optional)
+                  </label>
+                  <textarea
+                    value={workoutForm.description}
+                    onChange={(e) =>
+                      setWorkoutForm({
+                        ...workoutForm,
+                        description: e.target.value,
+                      })
+                    }
+                    placeholder="Add notes..."
+                    rows="3"
+                    className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm"
+                  ></textarea>
+                </div>
+
+                <button
+                  onClick={handleAddWorkout}
+                  className="w-full bg-primary cursor-pointer hover:bg-primary-hover text-background-dark font-bold py-3 sm:py-4 rounded-xl transition-all text-sm sm:text-base"
+                >
+                  Schedule Workout
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

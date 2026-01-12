@@ -1,19 +1,163 @@
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SideBar.jsx";
+import LogoSvg from "../components/LogoSvg.jsx";
+import { getDashboardStats } from "../api/metricsService.js";
+import { getRecentWorkouts } from "../api/workoutService.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line, Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState(null);
+  const [recentWorkouts, setRecentWorkouts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const [dashboardStats, workouts] = await Promise.all([
+          getDashboardStats(),
+          getRecentWorkouts(5),
+        ]);
+
+        setStats(dashboardStats);
+        setRecentWorkouts(workouts);
+      } catch (err) {
+        setError(err.message);
+        console.error("Error fetching dashboard data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="bg-background-dark text-text-main overflow-hidden h-screen flex transition-colors duration-300 antialiased">
+        <Sidebar handleLogout={handleLogout} />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-text-secondary">Loading dashboard...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-background-dark text-text-main overflow-hidden h-screen flex transition-colors duration-300 antialiased">
+        <Sidebar handleLogout={handleLogout} />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-red-500 mb-4">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-primary text-background-dark px-4 py-2 rounded"
+            >
+              Retry
+            </button>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  const todayStats = stats?.today || {};
+  const weeklyData = stats?.weekly || [];
+  const goalsProgress = stats?.goalsProgress || {};
+  const streak = stats?.streak || 0;
+
+  // Prepare chart data
+  const chartData = {
+    labels: weeklyData.map((d) => d.day),
+    datasets: [
+      {
+        label: "Active Minutes",
+        data: weeklyData.map((d) => d.activeMinutes),
+        borderColor: "#0ea5e9",
+        backgroundColor: "rgba(14, 165, 233, 0.1)",
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          color: "#94a3b8",
+          font: { size: 12 },
+        },
+      },
+      tooltip: {
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        titleColor: "#fff",
+        bodyColor: "#94a3b8",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: "rgba(148, 163, 184, 0.1)",
+        },
+        ticks: {
+          color: "#94a3b8",
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#94a3b8",
+        },
+      },
+    },
+  };
+
   return (
     <div className="bg-background-dark text-text-main overflow-hidden h-screen flex transition-colors duration-300 antialiased">
       <Sidebar handleLogout={handleLogout} />
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col h-full overflow-hidden bg-background-dark">
         <header className="flex-shrink-0 px-8 py-8 md:px-12 bg-background-dark z-20 flex items-center justify-between">
           <div>
@@ -34,7 +178,7 @@ const Dashboard = () => {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-bold text-text-main leading-none">
-                  5 Days
+                  {streak} Days
                 </span>
                 <span className="text-[10px] font-bold text-text-secondary uppercase tracking-wider">
                   Streak
@@ -58,7 +202,6 @@ const Dashboard = () => {
 
         <div className="flex-1 overflow-y-auto px-8 pb-8 md:px-12 md:pb-12 no-scrollbar">
           <div className="max-w-[1600px] mx-auto flex flex-col gap-8">
-            {/* Metric Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               <div className="bg-surface p-8 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 group cursor-default flex flex-col justify-between h-48 md:h-56 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
@@ -82,7 +225,7 @@ const Dashboard = () => {
                 </div>
                 <div className="z-10">
                   <h3 className="text-5xl lg:text-6xl font-extrabold text-text-main tracking-tighter mb-1">
-                    2,450
+                    {todayStats.caloriesBurned || 0}
                   </h3>
                   <p className="text-text-secondary font-medium">
                     kcal burned today
@@ -112,7 +255,7 @@ const Dashboard = () => {
                 </div>
                 <div className="z-10">
                   <h3 className="text-5xl lg:text-6xl font-extrabold text-text-main tracking-tighter mb-1">
-                    320
+                    {todayStats.activeMinutes || 0}
                   </h3>
                   <p className="text-text-secondary font-medium">
                     minutes this week
@@ -142,7 +285,7 @@ const Dashboard = () => {
                 </div>
                 <div className="z-10">
                   <h3 className="text-5xl lg:text-6xl font-extrabold text-text-main tracking-tighter mb-1">
-                    185
+                    {todayStats.weight || "—"}
                   </h3>
                   <p className="text-text-secondary font-medium">
                     lbs recorded
@@ -151,7 +294,6 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Activity Overview and Weekly Goal */}
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
               <div className="xl:col-span-2 bg-surface rounded-3xl shadow-card p-8 flex flex-col">
                 <div className="flex justify-between items-end mb-10">
@@ -160,7 +302,7 @@ const Dashboard = () => {
                       Activity Overview
                     </h3>
                     <p className="text-sm text-text-secondary">
-                      Intensity vs Volume over the last 7 days
+                      Active minutes over the last 7 days
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -172,61 +314,14 @@ const Dashboard = () => {
                     </button>
                   </div>
                 </div>
-                <div className="flex-1 flex items-end justify-between gap-4 h-[250px] w-full px-2">
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[40%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">
-                      Mon
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[65%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">
-                      Tue
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-primary group-hover:bg-primary-dark h-[85%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-primary">Wed</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[45%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">
-                      Thu
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-primary/40 group-hover:bg-primary/60 h-[60%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">
-                      Fri
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-surface-highlight h-[30%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">
-                      Sat
-                    </span>
-                  </div>
-                  <div className="flex flex-col items-center gap-4 flex-1 h-full justify-end group cursor-pointer">
-                    <div className="w-full max-w-[60px] bg-surface-highlight rounded-xl relative h-full flex items-end overflow-hidden transition-colors group-hover:bg-surface">
-                      <div className="w-full bg-surface-highlight h-[20%] rounded-xl transition-all duration-500 ease-out"></div>
-                    </div>
-                    <span className="text-xs font-bold text-text-secondary group-hover:text-primary transition-colors">
-                      Sun
-                    </span>
-                  </div>
+                <div className="flex-1">
+                  {weeklyData.length > 0 ? (
+                    <Line data={chartData} options={chartOptions} />
+                  ) : (
+                    <p className="text-text-secondary text-center py-8">
+                      No data available
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -257,29 +352,34 @@ const Dashboard = () => {
                       d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
+                      strokeWidth="2"
                     ></path>
                     <path
                       className="text-primary stroke-current"
                       d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                       fill="none"
-                      stroke-dasharray="60, 100"
-                      stroke-linecap="round"
-                      stroke-width="2"
+                      strokeDasharray={`${
+                        (goalsProgress.percentage || 0) * 0.88
+                      }, 100`}
+                      strokeLinecap="round"
+                      strokeWidth="2"
                     ></path>
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <span className="text-6xl font-extrabold text-text-main tracking-tight">
-                      3
+                      {goalsProgress.completed || 0}
                       <span className="text-2xl text-text-secondary font-bold">
-                        /5
+                        /{goalsProgress.total || 0}
                       </span>
                     </span>
                   </div>
                 </div>
                 <div className="mt-6 text-center">
                   <p className="text-sm font-medium text-text-secondary">
-                    You're <span className="text-primary font-bold">60%</span>{" "}
+                    You're{" "}
+                    <span className="text-primary font-bold">
+                      {goalsProgress.percentage || 0}%
+                    </span>
                     of the way there.
                   </p>
                   <button className="mt-4 text-xs font-bold text-primary hover:text-primary-dark uppercase tracking-widest transition-colors">
@@ -289,7 +389,6 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Up Next and Recent Workouts */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 pb-4">
               <div className="bg-surface rounded-3xl shadow-card p-8 flex flex-col relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-bl-full pointer-events-none transition-opacity group-hover:opacity-70"></div>
@@ -346,63 +445,46 @@ const Dashboard = () => {
                   </a>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <div className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle">
-                    <div className="size-12 rounded-xl bg-orange-50 dark:bg-orange-900/10 text-orange-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
-                      <span className="material-symbols-outlined">
-                        directions_run
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">
-                        Morning Run
-                      </h4>
-                      <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">
-                        Cardio • 5.2 km
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-text-main">45 min</p>
-                      <p className="text-xs text-text-secondary">Today</p>
-                    </div>
-                  </div>
-                  <div className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle">
-                    <div className="size-12 rounded-xl bg-purple-50 dark:bg-purple-900/10 text-purple-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
-                      <span className="material-symbols-outlined">
-                        fitness_center
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">
-                        Upper Body Power
-                      </h4>
-                      <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">
-                        Strength • Chest
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-text-main">60 min</p>
-                      <p className="text-xs text-text-secondary">Yesterday</p>
-                    </div>
-                  </div>
-                  <div className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle">
-                    <div className="size-12 rounded-xl bg-teal-50 dark:bg-teal-900/10 text-teal-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
-                      <span className="material-symbols-outlined">
-                        self_improvement
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">
-                        Yoga Flow
-                      </h4>
-                      <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">
-                        Mobility
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-text-main">30 min</p>
-                      <p className="text-xs text-text-secondary">Oct 23</p>
-                    </div>
-                  </div>
+                  {recentWorkouts.length > 0 ? (
+                    recentWorkouts.map((workout) => (
+                      <div
+                        key={workout._id}
+                        className="group flex items-center p-4 rounded-2xl hover:bg-background-dark/50 transition-colors cursor-pointer border border-transparent hover:border-border-subtle"
+                      >
+                        <div className="size-12 rounded-xl bg-orange-50 dark:bg-orange-900/10 text-orange-500 flex items-center justify-center mr-5 group-hover:scale-110 transition-transform">
+                          {workout.type === "Cardio" ? (
+                            <span className="material-symbols-outlined">
+                              directions_run
+                            </span>
+                          ) : (
+                            <LogoSvg className="w-6 h-6" />
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-text-main text-lg group-hover:text-primary transition-colors">
+                            {workout.name}
+                          </h4>
+                          <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">
+                            {workout.type}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-bold text-text-main">
+                            {workout.duration} min
+                          </p>
+                          <p className="text-xs text-text-secondary">
+                            {new Date(
+                              workout.scheduledDate
+                            ).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-text-secondary text-center py-8">
+                      No recent workouts
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

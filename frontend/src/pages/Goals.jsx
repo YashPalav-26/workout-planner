@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/SideBar.jsx";
+import LogoSvg from "../components/LogoSvg.jsx";
+import {
+  getGoals,
+  createGoal,
+  deleteGoal,
+  updateGoal,
+} from "../api/goalService.js";
 
 const Goals = () => {
   const navigate = useNavigate();
@@ -10,48 +17,50 @@ const Goals = () => {
     navigate("/login");
   };
 
-  const [goals, setGoals] = useState([
-    {
-      id: 1,
-      text: "Run 5 miles without stopping",
-      completed: false,
-      category: "Cardio",
-      icon: "directions_run",
-      progress: 64,
-      unit: "km",
-      current: 3.2,
-      target: 5,
-      color: "orange",
-    },
-    {
-      id: 2,
-      text: "Bench Press 200 lbs max",
-      completed: false,
-      category: "Strength",
-      icon: "fitness_center",
-      progress: 92,
-      unit: "lbs",
-      current: 185,
-      target: 200,
-      color: "indigo",
-    },
-    {
-      id: 3,
-      text: "Drink 3L of water daily",
-      completed: true,
-      category: "Nutrition",
-      icon: "water_drop",
-      progress: 100,
-      unit: "L",
-      current: 3,
-      target: 3,
-      color: "emerald",
-    },
-  ]);
-
+  const [goals, setGoals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [newGoal, setNewGoal] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showModal, setShowModal] = useState(false);
+  const [newGoalCategory, setNewGoalCategory] = useState("Cardio");
+  const [newGoalTarget, setNewGoalTarget] = useState("");
+  const [newGoalUnit, setNewGoalUnit] = useState("%");
+
+  // Fetch goals on component mount
+  useEffect(() => {
+    const fetchGoals = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getGoals(selectedCategory);
+        // Map API response to component state
+        const mappedGoals = data.map((goal) => ({
+          _id: goal._id,
+          text: goal.title,
+          completed: goal.isCompleted,
+          category: goal.category,
+          icon: goal.icon || "flag",
+          progress:
+            goal.targetValue > 0
+              ? Math.round((goal.currentValue / goal.targetValue) * 100)
+              : 0,
+          unit: goal.unit,
+          current: goal.currentValue,
+          target: goal.targetValue,
+          color: goal.color,
+        }));
+        setGoals(mappedGoals);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGoals();
+  }, [selectedCategory]);
+
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
@@ -63,36 +72,71 @@ const Goals = () => {
     };
   }, [showModal]);
 
-  const handleAddGoal = () => {
-    if (newGoal.trim() !== "") {
-      const newGoalObject = {
-        id: goals.length + 1,
-        text: newGoal,
-        completed: false,
-        category: "Uncategorized",
-        icon: "flag",
-        progress: 0,
-        unit: "%",
-        current: 0,
-        target: 100,
-        color: "primary",
+  const handleAddGoal = async () => {
+    if (newGoal.trim() === "" || !newGoalTarget) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const goalData = {
+        title: newGoal,
+        category: newGoalCategory,
+        targetValue: parseFloat(newGoalTarget),
+        unit: newGoalUnit,
+        description: "",
       };
-      setGoals([...goals, newGoalObject]);
+
+      const createdGoal = await createGoal(goalData);
+
+      const mappedGoal = {
+        _id: createdGoal._id,
+        text: createdGoal.title,
+        completed: createdGoal.isCompleted,
+        category: createdGoal.category,
+        icon: createdGoal.icon || "flag",
+        progress: 0,
+        unit: createdGoal.unit,
+        current: createdGoal.currentValue,
+        target: createdGoal.targetValue,
+        color: createdGoal.color,
+      };
+
+      setGoals([mappedGoal, ...goals]);
       setNewGoal("");
+      setNewGoalTarget("");
+      setNewGoalUnit("%");
+      setNewGoalCategory("Cardio");
       setShowModal(false);
+    } catch (err) {
+      alert("Error creating goal: " + err.message);
     }
   };
 
-  const handleToggleCompletion = (id) => {
-    setGoals(
-      goals.map((goal) =>
-        goal.id === id ? { ...goal, completed: !goal.completed } : goal
-      )
-    );
+  const handleToggleCompletion = async (id) => {
+    try {
+      const goal = goals.find((g) => g._id === id);
+      const updatedGoal = await updateGoal(id, {
+        isCompleted: !goal.completed,
+      });
+
+      setGoals(
+        goals.map((g) =>
+          g._id === id ? { ...g, completed: updatedGoal.isCompleted } : g
+        )
+      );
+    } catch (err) {
+      alert("Error updating goal: " + err.message);
+    }
   };
 
-  const handleDeleteGoal = (id) => {
-    setGoals(goals.filter((goal) => goal.id !== id));
+  const handleDeleteGoal = async (id) => {
+    try {
+      await deleteGoal(id);
+      setGoals(goals.filter((goal) => goal._id !== id));
+    } catch (err) {
+      alert("Error deleting goal: " + err.message);
+    }
   };
 
   const filteredGoals =
@@ -426,9 +470,7 @@ const Goals = () => {
                       <td className="px-4 sm:px-6 md:px-8 py-4 sm:py-6">
                         <div className="flex items-center gap-3 sm:gap-4">
                           <div className="size-8 sm:size-10 rounded-xl bg-surface-highlight flex items-center justify-center text-text-secondary group-hover:bg-text-secondary group-hover:text-background-dark transition-colors">
-                            <span className="material-symbols-outlined text-[18px] sm:text-[20px]">
-                              fitness_center
-                            </span>
+                            <LogoSvg className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
                           </div>
                           <span className="font-bold text-text-main text-sm sm:text-base">
                             Upper Body
@@ -495,9 +537,7 @@ const Goals = () => {
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="size-10 rounded-xl bg-surface-highlight flex items-center justify-center text-text-secondary">
-                        <span className="material-symbols-outlined text-[20px]">
-                          fitness_center
-                        </span>
+                        <LogoSvg className="w-5 h-5" />
                       </div>
                       <div>
                         <h4 className="font-bold text-text-main text-sm">
@@ -553,6 +593,57 @@ const Goals = () => {
                     className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm sm:text-base"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                    Category
+                  </label>
+                  <select
+                    value={newGoalCategory}
+                    onChange={(e) => setNewGoalCategory(e.target.value)}
+                    className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm sm:text-base"
+                  >
+                    <option>Cardio</option>
+                    <option>Strength</option>
+                    <option>Nutrition</option>
+                    <option>Habits</option>
+                    <option>Flexibility</option>
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <div>
+                    <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                      Target
+                    </label>
+                    <input
+                      type="number"
+                      value={newGoalTarget}
+                      onChange={(e) => setNewGoalTarget(e.target.value)}
+                      placeholder="100"
+                      className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs sm:text-sm font-bold text-text-secondary mb-2">
+                      Unit
+                    </label>
+                    <select
+                      value={newGoalUnit}
+                      onChange={(e) => setNewGoalUnit(e.target.value)}
+                      className="w-full p-3 sm:p-4 bg-background-dark border border-border-subtle rounded-xl focus:outline-none focus:ring-2 focus:ring-primary text-text-main text-sm"
+                    >
+                      <option>%</option>
+                      <option>km</option>
+                      <option>lbs</option>
+                      <option>kg</option>
+                      <option>L</option>
+                      <option>reps</option>
+                      <option>mins</option>
+                    </select>
+                  </div>
+                </div>
+
                 <button
                   onClick={handleAddGoal}
                   className="w-full bg-primary cursor-pointer hover:bg-primary-hover text-background-dark font-bold py-3 sm:py-4 rounded-xl transition-all text-sm sm:text-base"
